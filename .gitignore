@@ -1,0 +1,24 @@
+# Maven/Gradle build outputs
+**/target/
+**/build/
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+
+# LaTeX intermediate build outputs
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+**/logs/
