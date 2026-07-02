@@ -1,0 +1,229 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+
+% Configuration des couleurs de l'agence
+\definecolor{primary}{RGB}{0, 74, 153}
+\definecolor{secondary}{RGB}{100, 100, 100}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+% Configuration des liens hypertexte
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=primary,      
+    urlcolor=primary,
+    pdftitle={Cahier des Charges - Webpick Initializr},
+    pdfpagemode=FullScreen,
+}
+
+% Configuration des titres
+\titleformat{\section}{\Large\bfseries\color{primary}}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\titleformat{\subsection}{\large\bfseries\color{primary}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{1em}{}
+
+% Configuration des en-tetes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\fontsize{9}{11}\selectfont Cahier des Charges | Webpick Initializr}
+\fancyhead[R]{\fontsize{9}{11}\selectfont \leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+% ==========================================
+% PAGE DE GARDE (ACADEMIQUE & ENTREPRISE)
+% ==========================================
+\begin{titlepage}
+    \centering
+    
+    % En-tete avec logos
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft}
+            \includegraphics[height=1.8cm]{figures/webpick_logo.png}
+        \end{flushleft}
+    \end{minipage}%
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright}
+            \includegraphics[height=1.8cm]{figures/ENSAA_logo.png}
+        \end{flushright}
+    \end{minipage}
+    
+    \vskip 3.5cm
+    
+    % Titre principal
+    {\large\scshape Rapport de Cadrage \& Spécifications}\\[0.5cm]
+    \rule{\linewidth}{1.5pt}\\[0.4cm]
+    {\huge\bfseries\color{primary} CAHIER DES CHARGES}\\[0.5cm]
+    {\large\bfseries Webpick Initializr : Générateur Dynamique de Projets et d'Infrastructure CI/CD}\\[0.4cm]
+    \rule{\linewidth}{1.5pt}\\[2.5cm]
+    
+    % Informations du stage
+    \begin{minipage}{0.48\textwidth}
+        \begin{flushleft} \large
+            \textbf{Réalisé par :}\\
+            BOUANANI Abderrahman\\
+            \small Étudiant Ingénieur Stagiaire\\
+            \small École Nationale des Sciences Appliquées
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \begin{flushright} \large
+            \textbf{Sous la supervision de :}\\
+            M. Abderrahim GOUNANE\\
+            \small Maître de Stage / Chef de projet\\
+            \small Agence Webpick
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    % Bas de page
+    {\large Stage d'été d'Ingénierie --- Juillet -- Août 2026}
+    
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+% ==========================================
+% SECTION 1 : INTRODUCTION
+% ==========================================
+\section{Introduction et Contexte du Projet}
+
+\subsection{Présentation de l'Entreprise Webpick}
+Webpick est une agence digitale moderne, spécialisée dans le développement d'applications Web et Mobiles à forte valeur ajoutée, ainsi que dans le conseil et l'intégration de solutions Cloud et DevOps. Pour maintenir un niveau élevé de compétitivité, l'agence rationalise en permanence ses processus de livraison logicielle.
+
+\subsection{Objectifs du Stage d'Ingénierie}
+Ce stage d'été 2026, réalisé par un élève-ingénieur de l'ENSA Agadir, s'inscrit dans une démarche de recherche, d'optimisation et d'industrialisation des méthodes de développement de l'agence. L'objectif est double :
+\begin{itemize}[label=\textcolor{primary}{\textbullet}]
+    \item \textbf{Académique :} Mettre en pratique les concepts avancés d'architecture logicielle (Clean Architecture, programmation orientée objet), de validation de modèles, et de gestion de flux asynchrones.
+    \item \textbf{Professionnel :} Livrer un produit fonctionnel, robuste et immédiatement exploitable par les équipes techniques de Webpick pour accélérer la phase d'initialisation de projet (Day 0).
+\end{itemize}
+
+\subsection{Problématique : L'initialisation répétitive (Day 0)}
+La mise en place de l'écosystème technique d'un nouveau projet implique le démarrage de tâches répétitives à faible valeur ajoutée : initialisation de la structure MVC, configuration des descripteurs de dépendances, écriture des Dockerfiles multi-stage, et rédaction des pipelines CI/CD Jenkins. Cette étape manuelle est sujette aux erreurs, ralentit le démarrage effectif et nuit à l'homogénéité du parc applicatif.
+
+% ==========================================
+% SECTION 2 : ANALYSE DU BESOIN
+% ==========================================
+\section{Analyse du Besoin et État de l'Art}
+
+\subsection{Besoins Fonctionnels Principaux}
+La plateforme \textbf{Webpick Initializr} doit répondre aux exigences suivantes :
+\begin{enumerate}
+    \item \textbf{Interface Graphique Intuitive :} Un portail web unique permettant de paramétrer les attributs du projet cible (nom, package, BDD, options de déploiement).
+    \item \textbf{Moteur de Remplacement Dynamique :} Un module de templating capable d'injecter les variables utilisateurs dans des structures de fichiers prédéfinies.
+    \item \textbf{Export Automatisé :} Téléchargement direct d'une archive compressée ZIP contenant le projet prêt à compiler et à être exécuté.
+    \item \textbf{Intégration DevOps Native :} Fournir automatiquement les descripteurs d'environnement (Docker Compose) et d'automatisation CI/CD (Jenkinsfile).
+\end{enumerate}
+
+\subsection{État de l'Art et Comparatif Technique}
+Le tableau suivant résume le positionnement de notre solution vis-à-vis des outils du marché :
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{primary}}l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Solution} & \textbf{Limites identifiées} & \textbf{Valeur ajoutée de Webpick Initializr} \\
+\midrule
+Spring Initializr & Restreint à l'écosystème Java/Spring Boot. N'intègre pas la partie Frontend Angular ni Jenkins. & Approche Fullstack combinant Angular et Spring Boot adaptés aux conventions de l'agence. \\
+Yeoman (CLI) & Nécessite l'installation d'outils Node en local. Courbe d'apprentissage CLI pour les profils non-JS. & Interface Web ergonomique hébergée en interne, accessible sans configuration locale préalable. \\
+Spotify Backstage & Solution extrêmement complexe nécessitant une infrastructure et une maintenance lourdes. & Application agile, légère et ciblée, conçue spécifiquement pour le flux de travail Webpick. \\
+\bottomrule
+\end{tabularx}
+\caption{Positionnement technologique du projet}
+\end{table}
+
+% ==========================================
+% SECTION 3 : CONCEPTION ET ARCHITECTURE
+% ==========================================
+\section{Conception et Spécifications Techniques}
+
+Le projet exige une séparation stricte des préoccupations (Separation of Concerns). Le choix s'est ainsi porté sur une architecture découplée.
+
+\subsection{Stack Technologique Retenue}
+Afin de garantir un rendu de niveau professionnel, la stack technique s'appuie sur des frameworks d'entreprise rigoureux :
+\begin{itemize}[label=\textcolor{primary}{\textbullet}]
+    \item \textbf{Frontend --- Angular 18+ :} Choisi pour son architecture orientée composants, son typage fort en TypeScript, l'utilisation de \textbf{RxJS} et des \textbf{Reactive Forms} (standard de choix pour la gestion robuste de formulaires conditionnels complexes).
+    \item \textbf{Backend --- Spring Boot 3+ (Java 21) :} Standard industriel pour le développement d'API sécurisées et robustes. Il tirera parti des fonctionnalités modernes de Java 21 (Records, pattern matching).
+    \item \textbf{Moteur de Templating --- Apache FreeMarker :} Utilisé côté backend pour compiler dynamiquement les fichiers sources à partir de modèles prédéfinis.
+    \item \textbf{Stockage --- PostgreSQL :} Base de données relationnelle pour le suivi des configurations générées.
+    \item \textbf{Conteneurisation \& CI/CD --- Docker, Docker Compose \& Jenkins :} Docker et Compose pour assurer la conteneurisation et la portabilité locale de la solution. Jenkins est intégré pour héberger et orchestrer les pipelines CI/CD automatisés qui seront générés dynamiquement.
+\end{itemize}
+
+\subsection{Architecture Applicative (Clean Architecture)}
+Le backend Spring Boot sera découpé en quatre couches concentriques afin d'assurer l'indépendance totale de la logique métier vis-à-vis des détails technologiques et des frameworks extérieurs :
+\begin{enumerate}
+    \item \textbf{Couche Domaine (Entities) :} Couche centrale contenant la pure logique métier, les modèles abstraits de projets à générer et les règles de validation fondamentales. Elle est totalement indépendante des frameworks, bases de données ou bibliothèques tierces.
+    \item \textbf{Couche Présentation (API REST) :} Expose les points d'accès (Endpoints) HTTP et assure la validation préliminaire des requêtes (`@Valid`).
+    \item \textbf{Couche Application (Cas d'utilisation) :} Contient la logique d'orchestration et les scénarios d'utilisation (validation métier, appel au moteur de templating, archivage ZIP).
+    \item \textbf{Couche Infrastructure :} Gère les détails techniques et physiques (accès au système de fichiers pour lire les modèles, persistence PostgreSQL, intégrations d'API Git).
+\end{enumerate}
+
+\subsection{Isolation des Responsabilités}
+Afin de garantir un périmètre d'action strictement délimité et maîtrisable, l'application se concentre exclusivement sur l'orchestration et la gestion de la génération de code (le domaine métier de Webpick Initializr). Toutes les responsabilités et modules n'appartenant pas directement à ce flux de génération (comme la gestion de l'infrastructure d'hébergement finale ou la surveillance des pipelines à chaud) sont exclus ou découplés de la logique principale de l'application via des abstractions et interfaces.
+
+% ==========================================
+% SECTION 4 : PLANIFICATION ET LIVRABLES
+% ==========================================
+\section{Planification et Livrables du Stage}
+
+Le stage est planifié sur une durée de 8 semaines avec les jalons clés suivants :
+
+\subsection{Planning Prévisionnel}
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{c >{\bfseries\color{primary}}l X}
+\toprule
+\textbf{Semaines} & \textbf{Phase} & \textbf{Livrables et Activités} \\
+\midrule
+S1 -- S2 & Cadrage \& Conception & Rédaction du Cahier des Charges, conception de l'architecture logicielle, création des templates de base. \\
+S3 -- S4 & Développement Core (Backend) & Implémentation du moteur de compilation FreeMarker, génération de la structure de dossiers et du ZIP. \\
+S5 -- S6 & Développement Client (Frontend) & Création du formulaire adaptatif sous Angular 18, intégration RxJS, connexion à l'API REST. \\
+S7 & Intégration DevOps \& Tests & Génération dynamique de Dockerfiles/Jenkinsfiles, phase de tests unitaires et d'intégration. \\
+S8 & Déploiement \& Clôture & Déploiement de la solution sur serveur local, rédaction du rapport de stage et soutenance de fin de projet. \\
+\bottomrule
+\end{tabularx}
+\caption{Planning prévisionnel de réalisation}
+\end{table}
+
+\subsection{Critères d'Acceptation}
+Le projet sera considéré comme conforme et validé selon les indicateurs suivants :
+\begin{itemize}[label=\textcolor{primary}{\checkmark}]
+    \item Le projet généré compile et démarre localement sans intervention manuelle du développeur.
+    \item L'interface web de génération est réactive (temps de génération globale du package inférieur à 15 secondes).
+    \item L'architecture respecte les principes SOLID et dispose d'une couverture de tests minimale de 70\%.
+    \item Les pipelines CI/CD (Jenkinsfile) et les descripteurs d'infrastructure (Docker Compose) générés s'exécutent avec succès sur un environnement vierge sans erreur de syntaxe.
+\end{itemize}
+
+\newpage
+% ==========================================
+% SECTION 5 : CONCLUSION
+% ==========================================
+\section{Conclusion}
+Le projet \textbf{Webpick Initializr} représente un atout majeur pour l'amélioration continue des processus DevOps de l'agence Webpick. En s'appuyant sur un couplage robuste entre Angular 18 et Spring Boot 3, ce stage d'ingénierie offrira un livrable de qualité industrielle tout en permettant à l'étudiant de consolider ses compétences sur des architectures modernes de niveau professionnel.
+
+\end{document}
