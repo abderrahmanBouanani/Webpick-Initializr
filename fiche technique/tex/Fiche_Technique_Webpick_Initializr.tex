@@ -1,0 +1,89 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{amssymb}
+
+\definecolor{primary}{RGB}{0, 74, 153}
+\definecolor{secondary}{RGB}{100, 100, 100}
+
+\titleformat{\section}{\Large\bfseries\color{primary}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection.}{0.5em}{}
+
+\title{\vspace{-2cm}%
+\noindent
+\begin{minipage}{0.4\textwidth}
+    \includegraphics[width=3.2cm]{figures/webpick_logo.png}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.5\textwidth}
+    \raggedleft
+    \includegraphics[width=4.5cm]{figures/ENSAA_logo.png}
+\end{minipage}
+\vskip 1.5cm
+\textbf{\color{primary}Fiche Technique : Webpick Initializr} \\ \large Générateur Dynamique de Projets et d'Infrastructure CI/CD}
+\author{Abderrahman Bouanani \\ \textit{Étudiant Ingénieur Stagiaire dans Webpick}}
+\date{Juillet 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section{Présentation Générale}
+\textbf{Problématique :} La phase d'initialisation d'un nouveau projet client (le "Day 0") nécessite une configuration manuelle répétitive : création de dépôts, paramétrage des bases de données, configuration des pipelines CI/CD, et écriture des Dockerfiles. Cela entraîne des pertes de temps et des incohérences architecturales.
+
+\textbf{Solution - "Webpick Initializr" :} Inspirée des générateurs modernes, cette solution interne permet via un formulaire web détaillé de générer dynamiquement l'intégralité de la base de code d'un projet, incluant la logique métier, l'infrastructure et les pipelines de déploiement.
+
+\section{État de l'Art et Comparatif}
+L'analyse des solutions existantes sur le marché permet de positionner la valeur ajoutée de cet outil sur-mesure pour l'entreprise.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Solution} & \textbf{Avantages / Inconvénients} & \textbf{Différence avec Webpick Initializr} \\
+\midrule
+\textbf{Spring Initializr} & Référence pour l'écosystème Java. Rapide et efficace. \newline \textit{Limite :} Limité à Spring Boot, n'inclut pas la CI/CD interne ni les autres frameworks de l'agence. & Génère des architectures multi-langages adaptées aux standards de Webpick, incluant les manifestes Docker et les pipelines Jenkins. \\
+\textbf{Yeoman} & Outil CLI flexible avec un écosystème de générateurs. \newline \textit{Limite :} Utilisation en ligne de commande, courbe d'apprentissage, écosystème vieillissant. & Interface graphique intuitive (Frontend) éliminant la complexité des lignes de commande pour les nouvelles recrues. \\
+\textbf{Spotify Backstage} & Plateforme DevOps extrêmement complète. \newline \textit{Limite :} Complexité d'installation, maintenance lourde, YAML intensif. & Approche "MVP" légère et pragmatique, codée de zéro, nécessitant zéro coût d'infrastructure supplémentaire et dédiée au flux de Webpick. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Architecture Technique}
+Le système est conçu autour d'une architecture garantissant robustesse et maintenabilité, en respectant les principes SOLID et une séparation nette des préoccupations (Clean Architecture).
+
+\begin{itemize}[label=\textcolor{primary}{\textbullet}]
+    \item \textbf{Frontend (Interface Dynamique) :} Application en Angular ou React. Formulaire conditionnel intelligent adaptant les choix (ex: sélectionner "Spring Boot" affiche les options "Spring Security" ou "JPA").
+    \item \textbf{Backend (Moteur Core) :} Développé en Spring Boot ou Python. Responsable de la gestion des requêtes JSON et de l'orchestration des tâches.
+    \item \textbf{Moteur de Templating :} Utilisation d'un moteur (ex: FreeMarker, Thymeleaf ou Jinja2) pour la compilation dynamique des fichiers à partir de modèles "à trous" plutôt que par simple clonage statique.
+    \item \textbf{Module DevOps :} Intégration d'outils de conteneurisation (Docker) et génération de pipelines Jenkins pré-configurés pour l'intégration continue.
+\end{itemize}
+
+\section{Mécanique Interne de Génération}
+\begin{enumerate}
+    \item \textbf{Réception des données :} Le moteur reçoit les spécifications techniques (stack, base de données MySQL/MongoDB, type de CI/CD).
+    \item \textbf{Résolution des modèles :} Sélection des templates correspondants dans le catalogue interne.
+    \item \textbf{Compilation dynamique :} Injection des variables métiers dans le code source et les configurations d'infrastructure.
+    \item \textbf{Livrable :} Assemblage d'une archive (.zip) ou création directe du dépôt sur le gestionnaire de versions (Git/GitHub).
+\end{enumerate}
+
+\section{Bénéfices Stratégiques}
+\begin{itemize}[label=\textcolor{primary}{\checkmark}]
+    \item \textbf{Standardisation absolue :} Chaque projet démarre avec la même base, facilitant la réaffectation des ressources.
+    \item \textbf{Productivité (Time-to-Market) :} La configuration initiale (Day 0) passe de plusieurs heures à quelques secondes.
+    \item \textbf{Évolutivité :} Possibilité d'ajouter de nouvelles technologies au catalogue sans refactoriser le cœur du moteur de génération.
+\end{itemize}
+
+\end{document}
