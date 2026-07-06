@@ -1,0 +1,586 @@
+<mxfile host="65bd71144e">
+    <diagram id="webpick-initializr-cd" name="Webpick Class Diagram">
+        <mxGraphModel dx="2152" dy="1468" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="#303030" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="9" value="generation" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#FFFF00;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-455" y="-620" width="1927" height="2100" as="geometry"/>
+                </mxCell>
+                <mxCell id="pkg_application" value="application" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#38bdf8;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-300" y="40" width="1243" height="654" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="in ports" style="shape=folder;fontStyle=1;tabWidth=70;tabHeight=20;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#00FF00;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-280" y="156" width="300" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="pkg_domain" value="domain" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#38bdf8;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="1021" y="-330" width="340" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="pkg_git" value="git" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#FFFF00;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="1552" y="60" width="384" height="657" as="geometry"/>
+                </mxCell>
+                <mxCell id="pkg_ports" value="out ports" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#00FF00;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-270" y="416" width="1140" height="173" as="geometry"/>
+                </mxCell>
+                <mxCell id="pkg_infrastructure" value="infrastructure" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#38bdf8;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-300" y="741" width="1190" height="680" as="geometry"/>
+                </mxCell>
+                <mxCell id="IGenerateProjectUseCase" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IGenerateProjectUseCase&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-270" y="202" width="260" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="IGenerateProjectUseCase_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IGenerateProjectUseCase" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="IGenerateProjectUseCase_meth_110" value="+execute(context: GenerationContext): Path" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IGenerateProjectUseCase" vertex="1">
+                    <mxGeometry y="48" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor" value="&lt;b&gt;GenerateProjectInteractor&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="146" width="322" height="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_attr_112" value="-stackStrategies: List&amp;lt;IStackGeneratorStrategy&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="30" width="322" height="36" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_attr_devopsPort" value="-devopsPort: IDevOpsGeneratorPort" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="66" width="322" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_attr_113" value="-archivePort: IArchivePort" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="92" width="322" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_attr_114" value="-repoPort: IConfigRepositoryPort" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="118" width="322" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="-eventPublisher: ApplicationEventPublisher" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="144" width="322" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="170" width="322" height="6" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerateProjectInteractor_meth_116" value="+execute(context): byte[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerateProjectInteractor" vertex="1">
+                    <mxGeometry y="176" width="322" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext" value="&lt;b&gt;GenerationContext&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="1071" y="-280" width="260" height="506" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_118" value="-id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="30" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_119" value="-projectName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="56" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_120" value="-basePackage: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="82" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_121" value="-includeGit: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="108" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_122" value="-gitToken: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="134" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_backendFramework" value="-backendFramework: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="160" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_frontendFramework" value="-frontendFramework: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="186" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_databaseType" value="-databaseType: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="212" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_selectedDependencies" value="-selectedDependencies: List&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="238" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_devopsTools" value="-devopsTools: List&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="264" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_attr_projectMetadata" value="-projectMetadata: Map&amp;lt;String, String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="290" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="316" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_123" value="+validatePackageName()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="324" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_124" value="+hasValidGitCredentials()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="350" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_hasFrontend" value="+hasFrontend(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="376" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_isDockerEnabled" value="+isDockerEnabled(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="402" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_isJenkinsEnabled" value="+isJenkinsEnabled(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="428" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_isK8sEnabled" value="+isK8sEnabled(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="454" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GenerationContext_meth_getMetadata" value="+getMetadata(key: String): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GenerationContext" vertex="1">
+                    <mxGeometry y="480" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent" value="&lt;b&gt;ProjectGeneratedEvent&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="565" y="225" width="260" height="142" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent_attr_1" value="-context: GenerationContext" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectGeneratedEvent" vertex="1">
+                    <mxGeometry y="30" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent_attr_2" value="-zipContent: byte[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectGeneratedEvent" vertex="1">
+                    <mxGeometry y="56" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectGeneratedEvent" vertex="1">
+                    <mxGeometry y="82" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent_meth_1" value="+getContext(): GenerationContext" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectGeneratedEvent" vertex="1">
+                    <mxGeometry y="90" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectGeneratedEvent_meth_2" value="+getZipContent(): byte[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectGeneratedEvent" vertex="1">
+                    <mxGeometry y="116" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApplicationEventPublisher" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ApplicationEventPublisher&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="565" y="109" width="260" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApplicationEventPublisher_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ApplicationEventPublisher" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApplicationEventPublisher_meth_1" value="+publishEvent(event: Object): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ApplicationEventPublisher" vertex="1">
+                    <mxGeometry y="48" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GitPushEventListener" value="&lt;b&gt;GitPushEventListener&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="1606" y="539" width="260" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="GitPushEventListener_sep_attr" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GitPushEventListener" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="GitPushEventListener_attr_1" value="-gitPort: IGitRemotePort" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GitPushEventListener" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="GitPushEventListener_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GitPushEventListener" vertex="1">
+                    <mxGeometry y="64" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="GitPushEventListener_meth_1" value="+onProjectGenerated(event: ProjectGeneratedEvent): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GitPushEventListener" vertex="1">
+                    <mxGeometry y="72" width="260" height="58" as="geometry"/>
+                </mxCell>
+                <mxCell id="GithubApiAdapter" value="&lt;b&gt;GithubApiAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="1606" y="139" width="260" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="GithubApiAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GithubApiAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="GithubApiAdapter_meth_1" value="+pushToRemote(context: GenerationContext): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="GithubApiAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="IStackGeneratorStrategy" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IStackGeneratorStrategy&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="466" width="260" height="116" as="geometry"/>
+                </mxCell>
+                <mxCell id="IStackGeneratorStrategy_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IStackGeneratorStrategy" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="IStackGeneratorStrategy_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IStackGeneratorStrategy" vertex="1">
+                    <mxGeometry y="48" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="IStackGeneratorStrategy_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IStackGeneratorStrategy" vertex="1">
+                    <mxGeometry y="74" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="IDevOpsGeneratorPort" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IDevOpsGeneratorPort&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="466" width="260" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="IDevOpsGeneratorPort_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IDevOpsGeneratorPort" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="IDevOpsGeneratorPort_meth_generatePipelines" value="+generatePipelines(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IDevOpsGeneratorPort" vertex="1">
+                    <mxGeometry y="48" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="IArchivePort" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IArchivePort&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="466" width="260" height="89" as="geometry"/>
+                </mxCell>
+                <mxCell id="IArchivePort_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IArchivePort" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="IArchivePort_meth_128" value="+compressToZip(sourceDirectory: Path, targetZip: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IArchivePort" vertex="1">
+                    <mxGeometry y="48" width="260" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="IConfigRepositoryPort" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IConfigRepositoryPort&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="466" width="260" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="IConfigRepositoryPort_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IConfigRepositoryPort" vertex="1">
+                    <mxGeometry y="40" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="IConfigRepositoryPort_meth_130" value="+saveHistory(context: GenerationContext): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IConfigRepositoryPort" vertex="1">
+                    <mxGeometry y="48" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="SpringGeneratorAdapter" value="&lt;b&gt;SpringGeneratorAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="800" width="260" height="106" as="geometry"/>
+                </mxCell>
+                <mxCell id="SpringGeneratorAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="SpringGeneratorAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="SpringGeneratorAdapter_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="SpringGeneratorAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="SpringGeneratorAdapter_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="SpringGeneratorAdapter" vertex="1">
+                    <mxGeometry y="64" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="DjangoGeneratorAdapter" value="&lt;b&gt;DjangoGeneratorAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="920" width="260" height="106" as="geometry"/>
+                </mxCell>
+                <mxCell id="DjangoGeneratorAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="DjangoGeneratorAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="DjangoGeneratorAdapter_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="DjangoGeneratorAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="DjangoGeneratorAdapter_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="DjangoGeneratorAdapter" vertex="1">
+                    <mxGeometry y="64" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="ExpressGeneratorAdapter" value="&lt;b&gt;ExpressGeneratorAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="1040" width="260" height="106" as="geometry"/>
+                </mxCell>
+                <mxCell id="ExpressGeneratorAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ExpressGeneratorAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="ExpressGeneratorAdapter_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ExpressGeneratorAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ExpressGeneratorAdapter_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ExpressGeneratorAdapter" vertex="1">
+                    <mxGeometry y="64" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="AngularGeneratorAdapter" value="&lt;b&gt;SymfonyGeneratorAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="1160" width="260" height="106" as="geometry"/>
+                </mxCell>
+                <mxCell id="AngularGeneratorAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="AngularGeneratorAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="AngularGeneratorAdapter_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="AngularGeneratorAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="AngularGeneratorAdapter_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="AngularGeneratorAdapter" vertex="1">
+                    <mxGeometry y="64" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="ReactGeneratorAdapter" value="&lt;b&gt;ReactGeneratorAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-260" y="1280" width="260" height="106" as="geometry"/>
+                </mxCell>
+                <mxCell id="ReactGeneratorAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ReactGeneratorAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="ReactGeneratorAdapter_meth_supports" value="+supports(frameworkType: String): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ReactGeneratorAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ReactGeneratorAdapter_meth_generate" value="+generate(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ReactGeneratorAdapter" vertex="1">
+                    <mxGeometry y="64" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="DevOpsTemplateAdapter" value="&lt;b&gt;DevOpsTemplateAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="800" width="260" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="DevOpsTemplateAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="DevOpsTemplateAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="DevOpsTemplateAdapter_meth_generatePipelines" value="+generatePipelines(context: GenerationContext, targetPath: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="DevOpsTemplateAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="FreeMarkerEngineAdapter" value="&lt;b&gt;FreeMarkerEngineAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="153" y="973" width="260" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="FreeMarkerEngineAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="FreeMarkerEngineAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="FreeMarkerEngineAdapter_meth_render" value="+render(template: String, data: Map): byte[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="FreeMarkerEngineAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="ZipArchiveAdapter" value="&lt;b&gt;ZipArchiveAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="800" width="260" height="97" as="geometry"/>
+                </mxCell>
+                <mxCell id="ZipArchiveAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ZipArchiveAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="ZipArchiveAdapter_meth_134" value="+compressToZip(sourceDirectory: Path, targetZip: Path): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ZipArchiveAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="59" as="geometry"/>
+                </mxCell>
+                <mxCell id="PostgresConfigAdapter" value="&lt;b&gt;PostgresConfigAdapter&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="800" width="260" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="PostgresConfigAdapter_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="PostgresConfigAdapter" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="PostgresConfigAdapter_meth_136" value="+saveHistory(context: GenerationContext): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="PostgresConfigAdapter" vertex="1">
+                    <mxGeometry y="38" width="260" height="39" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntityMapper" value="&lt;b&gt;HistoryEntityMapper&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="920" width="260" height="76" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntityMapper_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntityMapper" vertex="1">
+                    <mxGeometry y="30" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntityMapper_meth_toEntity" value="+toEntity(context: GenerationContext): HistoryEntity" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntityMapper" vertex="1">
+                    <mxGeometry y="38" width="260" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntity" value="&lt;b&gt;HistoryEntity&lt;/b&gt;&lt;br&gt;&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="1092" width="260" height="142" as="geometry">
+                        <mxRectangle x="580" y="1092" width="122" height="42" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="HistoryEntity_attr_id" value="-id: Long" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntity" vertex="1">
+                    <mxGeometry y="40" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntity_attr_projectName" value="-projectName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntity" vertex="1">
+                    <mxGeometry y="66" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntity_attr_generatedAt" value="-generatedAt: LocalDateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntity" vertex="1">
+                    <mxGeometry y="92" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="HistoryEntity_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="HistoryEntity" vertex="1">
+                    <mxGeometry y="118" width="260" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_InitializrController_IGenerateProjectUseCase_1" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="InitializrController" target="IGenerateProjectUseCase" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="350" y="22"/>
+                            <mxPoint x="-75" y="22"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_InitializrController_IGenerateProjectUseCase_1_tgt" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_InitializrController_IGenerateProjectUseCase_1" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="52" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IGenerateProjectUseCase_3" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="IGenerateProjectUseCase" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IStackGeneratorStrategy_4" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="IStackGeneratorStrategy" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IStackGeneratorStrategy_4_src" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IStackGeneratorStrategy_4" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="-4" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IStackGeneratorStrategy_4_tgt" value="1..*" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IStackGeneratorStrategy_4" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IDevOpsGeneratorPort_devops" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="IDevOpsGeneratorPort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IDevOpsGeneratorPort_devops_src" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IDevOpsGeneratorPort_devops" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="-4" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IDevOpsGeneratorPort_devops_tgt" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IDevOpsGeneratorPort_devops" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IArchivePort_5" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="IArchivePort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IArchivePort_5_src" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IArchivePort_5" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IArchivePort_5_tgt" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IArchivePort_5" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IConfigRepositoryPort_6" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="IConfigRepositoryPort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IConfigRepositoryPort_6_src" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IConfigRepositoryPort_6" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_IConfigRepositoryPort_6_tgt" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_IConfigRepositoryPort_6" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-8" y="-21" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_SpringGeneratorAdapter_IStackGeneratorStrategy" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;" parent="1" source="SpringGeneratorAdapter" target="IStackGeneratorStrategy" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_DjangoGeneratorAdapter_IStackGeneratorStrategy" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="SpringGeneratorAdapter" target="IStackGeneratorStrategy" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_ExpressGeneratorAdapter_IStackGeneratorStrategy" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.252;entryY=1.093;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="DjangoGeneratorAdapter_meth_generate" target="IStackGeneratorStrategy_meth_generate" edge="1">
+                    <mxGeometry x="-0.072" y="2" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-315" y="1005"/>
+                            <mxPoint x="-318" y="756"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_AngularGeneratorAdapter_IStackGeneratorStrategy" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.129;entryY=1.058;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="AngularGeneratorAdapter_meth_supports" target="IStackGeneratorStrategy_meth_generate" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-340" y="1211"/>
+                            <mxPoint x="-340" y="755"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_ReactGeneratorAdapter_IStackGeneratorStrategy" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.023;entryY=0.995;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ReactGeneratorAdapter_meth_generate" target="IStackGeneratorStrategy_meth_generate" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-356" y="1365"/>
+                            <mxPoint x="-362" y="755"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_DevOpsTemplateAdapter_IDevOpsGeneratorPort" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;" parent="1" source="DevOpsTemplateAdapter" target="IDevOpsGeneratorPort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_SpringGeneratorAdapter_FreeMarkerEngineAdapter" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="SpringGeneratorAdapter" target="FreeMarkerEngineAdapter" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_DevOpsTemplateAdapter_FreeMarkerEngineAdapter" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="DevOpsTemplateAdapter" target="FreeMarkerEngineAdapter" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_PostgresConfigAdapter_HistoryEntityMapper" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="PostgresConfigAdapter" target="HistoryEntityMapper" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_HistoryEntityMapper_HistoryEntity" value="crée" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="HistoryEntityMapper" target="HistoryEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_ZipArchiveAdapter_IArchivePort_9" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;" parent="1" source="ZipArchiveAdapter" target="IArchivePort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_PostgresConfigAdapter_IConfigRepositoryPort_10" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;" parent="1" source="PostgresConfigAdapter" target="IConfigRepositoryPort" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_ProjectMapper_GenerationContext_12" value="crée" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="ProjectMapper" target="GenerationContext" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_ApplicationEventPublisher_13" value="publie" style="endArrow=open;endSize=12;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="ApplicationEventPublisher" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_ApplicationEventPublisher_13_src" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_ApplicationEventPublisher_13" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_ApplicationEventPublisher_13_tgt" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="edge_GenerateProjectInteractor_ApplicationEventPublisher_13" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge_GenerateProjectInteractor_ProjectGeneratedEvent_14" value="publie" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="GenerateProjectInteractor" target="ProjectGeneratedEvent" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GitPushEventListener_ProjectGeneratedEvent_15" value="écoute" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="GitPushEventListener" target="ProjectGeneratedEvent" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_GithubApiAdapter_GenerationContext_17" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=-0.003;exitY=-0.043;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="GithubApiAdapter_meth_1" target="GenerationContext_attr_projectMetadata" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;IGitRemotePort" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="1614" y="289" width="260" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry y="40" width="260" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="+pushToRemote(context: GenerationContext): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry y="60" width="260" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="utilise" style="endArrow=open;endSize=12;html=1;rounded=0;exitX=0.464;exitY=1.033;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="4" target="GitPushEventListener" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1744" y="517" as="sourcePoint"/>
+                        <mxPoint x="1744" y="428" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="5" connectable="0" vertex="1">
+                    <mxGeometry x="-0.8" relative="1" as="geometry">
+                        <mxPoint x="10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="1" style="edgeLabel;resizable=0;align=center;verticalAlign=middle;html=1;" parent="5" connectable="0" vertex="1">
+                    <mxGeometry x="0.8" relative="1" as="geometry">
+                        <mxPoint x="-10" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="implémente" style="endArrow=block;endSize=16;endFill=0;dashed=1;html=1;rounded=0;exitX=0.437;exitY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1729.2399999999998" y="285.87200000000007" as="sourcePoint"/>
+                        <mxPoint x="1727.29" y="209" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="pkg_presentation" value="presentation" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=25;tabPosition=left;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#38bdf8;strokeWidth=1;align=center;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="-230" y="-530" width="1030" height="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="InitializrController" value="&lt;b&gt;InitializrController&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="-360" width="240" height="122" as="geometry"/>
+                </mxCell>
+                <mxCell id="InitializrController_attr_102" value="-useCase: IGenerateProjectUseCase" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="InitializrController" vertex="1">
+                    <mxGeometry y="30" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="InitializrController_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="InitializrController" vertex="1">
+                    <mxGeometry y="56" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="InitializrController_meth_104" value="+generateProject(request: ProjectRequestDTO): ResponseEntity&amp;lt;byte[]&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="InitializrController" vertex="1">
+                    <mxGeometry y="64" width="240" height="58" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectMapper" value="&lt;b&gt;ProjectMapper&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="-351" width="240" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectMapper_sep_meth" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectMapper" vertex="1">
+                    <mxGeometry y="30" width="240" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectMapper_meth_1" value="+toContext(request: ProjectRequestDTO): GenerationContext" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectMapper" vertex="1">
+                    <mxGeometry y="50" width="240" height="62" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO" value="&lt;b&gt;ProjectRequestDTO&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="-210" y="-468" width="260" height="284" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_106" value="+projectName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="30" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_107" value="+basePackage: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="56" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_108" value="+databaseType: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="82" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_backend" value="+backend: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="108" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_frontend" value="+frontend: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="134" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_db" value="+db: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="160" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_deps" value="+deps: List&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="186" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_devops" value="+devops: List&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="212" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_attr_metadata" value="+metadata: Map&amp;lt;String, String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="238" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ProjectRequestDTO_sep_attr" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ProjectRequestDTO" vertex="1">
+                    <mxGeometry y="264" width="260" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_InitializrController_ProjectRequestDTO_2" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="InitializrController" target="ProjectRequestDTO" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_InitializrController_ProjectMapper_11" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="InitializrController" target="ProjectMapper" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;b&gt;FreeMarkerConfig&lt;br&gt;&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="155" y="1100" width="260" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="utilise" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="FreeMarkerEngineAdapter_meth_render" target="17">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="190.7514450867052" y="890" as="sourcePoint"/>
+                        <mxPoint x="262.2485549132948" y="983" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

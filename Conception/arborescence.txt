@@ -1,0 +1,33 @@
+src/main/java/com/webpick/initializr
+│
+├── generation/                     (MODULE 1 : Cœur de métier du projet)
+│   │
+│   ├── domain/                     (Couche 1 : Le Noyau)
+│   │   ├── GenerationContext.java  (Les données pures du projet à générer)
+│   │   └── ProjectException.java   (Les erreurs métier)
+│   │
+│   ├── application/                (Couche 2 : L'Orchestrateur)
+│   │   ├── ports/                  (Les "Prises électriques" / Contrats)
+│   │   │   ├── in/                 
+│   │   │   │   └── IGenerateProjectUseCase.java (Ce que le module sait faire)
+│   │   │   └── out/                
+│   │   │       ├── ITemplateEnginePort.java     (Besoin de générer du texte)
+│   │   │       └── IArchivePort.java            (Besoin de zipper des fichiers)
+│   │   │
+│   │   ├── GenerateProjectInteractor.java      (Le chef d'orchestre qui exécute la logique)
+│   │   └── ProjectGeneratedEvent.java          (Événement publié après génération)
+│   │
+│   ├── infrastructure/             (Couche 3 : La Boîte à outils / Adaptateurs)
+│   │   ├── FreeMarkerAdapter.java  (Implémente ITemplateEnginePort avec FreeMarker)
+│   │   └── ZipArchiveAdapter.java  (Implémente IArchivePort avec java.util.zip)
+│   │
+│   └── presentation/               (Couche 4 : Le Guichet d'accueil)
+│       ├── InitializrController.java (Reçoit les requêtes HTTP / API REST)
+│       ├── ProjectRequestDTO.java    (Le format des données reçues)
+│       └── ProjectMapper.java        (MapStruct : Traduit DTO en GenerationContext)
+│
+└── git/                            (MODULE 2 : Intégration Git - Totalement isolé)
+    ├── application/
+    │   └── GitPushEventListener.java (Écoute en silence si un projet est généré)
+    └── infrastructure/
+        └── GithubApiAdapter.java     (Se connecte à GitHub)
