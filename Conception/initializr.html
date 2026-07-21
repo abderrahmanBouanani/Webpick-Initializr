@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpick Initializr — Générateur de projets</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        /* Design System: Slate Noir (Uncodixify Standard) */
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --surface-hover: #334155;
+            --primary-color: #38bdf8;
+            --primary-hover: #0ea5e9;
+            --border-color: #334155;
+            --border-focus: #475569;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+            --error-color: #f43f5e;
+            --radius: 6px;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        /* Top Header */
+        header {
+            height: 56px;
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        header .badge {
+            background-color: var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: var(--radius);
+            font-weight: 500;
+        }
+
+        /* Layout Grid */
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar: Fixed width, solid border */
+        .sidebar {
+            width: 260px;
+            background-color: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .summary-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .summary-item span:first-child {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .summary-item span:last-child {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 150ms ease;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Main Scrollable Content */
+        .main-form {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        /* Inputs & Selections */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input[type="text"], select {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 150ms ease;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--primary-color);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        /* Selectable Cards (Strict 6px Radius, simple border) */
+        .select-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 14px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .select-card:hover {
+            background-color: var(--surface-hover);
+            border-color: var(--border-focus);
+        }
+
+        .select-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        .select-card input[type="radio"], 
+        .select-card input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .select-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .select-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Checkmark icon for selected cards */
+        .select-card.selected::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 6px;
+            height: 10px;
+            border: solid var(--primary-color);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Code Preview Area (Split screen / right panel) */
+        .preview-panel {
+            width: 380px;
+            background-color: #0b0f19;
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            height: 48px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            justify-content: space-between;
+        }
+
+        .preview-header h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .preview-body {
+            flex: 1;
+            padding: 16px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Monospace CLI display */
+        .cli-box {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        /* File Tree Viewer */
+        .file-tree {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .file-tree-item {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .file-tree-item:hover {
+            background-color: var(--surface-hover);
+            color: var(--text-color);
+        }
+
+        .file-tree-item.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Dynamic display classes */
+        .dynamic-group {
+            display: none;
+        }
+
+        .dynamic-group.active {
+            display: flex;
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                flex-direction: column;
+                overflow: y-scroll;
+            }
+            .sidebar, .preview-panel {
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .preview-panel {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Webpick Initializr</h1>
+        <div class="badge">Mode Architecte</div>
+    </header>
+
+    <div class="workspace">
+        <!-- Sidebar: Architecture Summary -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Résumé</h3>
+                <ul class="summary-list">
+                    <li class="summary-item">
+                        <span>Backend</span>
+                        <span id="sum-backend">Spring Boot</span>
+                    </li>
+                    <li class="summary-item">
+                        <span>Frontend</span>
+                        <span id="sum-frontend">Angular</span>
+                    </li>
+                    <li class="summary-item">
+                        <span>Base de données</span>
+                        <span id="sum-db">PostgreSQL</span>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn-primary" id="btn-generate">
+                Générer le projet (.zip)
+            </button>
+        </aside>
+
+        <!-- Main Form -->
+        <main class="main-form">
+            <!-- 1. Core Architecture -->
+            <section class="form-section">
+                <h2 class="section-title">1. Architecture Core</h2>
+                <div class="form-group">
+                    <label>Framework Backend Principal</label>
+                    <div class="grid-3" id="backend-cards">
+                        <div class="select-card selected" data-value="spring">
+                            <h4>Spring Boot</h4>
+                            <p>Architecture Java d'entreprise robuste.</p>
+                        </div>
+                        <div class="select-card" data-value="django">
+                            <h4>Django</h4>
+                            <p>Framework Python haut niveau orienté données.</p>
+                        </div>
+                        <div class="select-card" data-value="express">
+                            <h4>Express</h4>
+                            <p>Node.js asynchrone ultra-léger en TypeScript.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="frontend-select">Application Frontend</label>
+                        <select id="frontend-select">
+                            <option value="angular">Angular (Architecture modulaire, RxJS)</option>
+                            <option value="react">React (Composants légers, Hooks)</option>
+                            <option value="none">Aucun (API REST uniquement)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="db-select">Base de données</label>
+                        <select id="db-select">
+                            <option value="postgres">PostgreSQL (Recommandé)</option>
+                            <option value="mysql">MySQL</option>
+                            <option value="mongodb">MongoDB (NoSQL)</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Technical Specifications -->
+            <section class="form-section">
+                <h2 class="section-title">2. Spécifications Techniques</h2>
+                
+                <!-- Spring Boot Fields -->
+                <div id="fields-spring" class="dynamic-group active grid-2">
+                    <div class="form-group">
+                        <label for="spring-lang">Language</label>
+                        <select id="spring-lang">
+                            <option>Java 21</option>
+                            <option>Java 17</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="spring-build">Outil de Build</label>
+                        <select id="spring-build">
+                            <option>Maven</option>
+                            <option>Gradle</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="spring-group">Group ID</label>
+                        <input type="text" id="spring-group" value="com.webpick">
+                    </div>
+                    <div class="form-group">
+                        <label for="spring-artifact">Artifact ID</label>
+                        <input type="text" id="spring-artifact" value="core-service">
+                    </div>
+                </div>
+
+                <!-- Django Fields -->
+                <div id="fields-django" class="dynamic-group grid-2">
+                    <div class="form-group">
+                        <label for="django-py">Version Python</label>
+                        <select id="django-py">
+                            <option>Python 3.12</option>
+                            <option>Python 3.11</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="django-pkg">Gestionnaire de paquets</label>
+                        <select id="django-pkg">
+                            <option>Poetry</option>
+                            <option>Pip + Virtualenv</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="django-project">Nom du Projet</label>
+                        <input type="text" id="django-project" value="webpick_core">
+                    </div>
+                </div>
+
+                <!-- Express Fields -->
+                <div id="fields-express" class="dynamic-group grid-2">
+                    <div class="form-group">
+                        <label for="express-lang">Langage</label>
+                        <select id="express-lang">
+                            <option>TypeScript</option>
+                            <option>JavaScript</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="express-pkg">Gestionnaire de paquets</label>
+                        <select id="express-pkg">
+                            <option>npm</option>
+                            <option>yarn</option>
+                            <option>pnpm</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Architecture & Security -->
+            <section class="form-section">
+                <h2 class="section-title">3. Sécurité Applicative</h2>
+                <div class="grid-2" id="security-checkboxes">
+                    <!-- Dynamic check cards will load here -->
+                </div>
+            </section>
+
+            <!-- 4. DevOps Pipelines -->
+            <section class="form-section">
+                <h2 class="section-title">4. Orchestration DevOps</h2>
+                <div class="grid-3">
+                    <div class="select-card selected" id="devops-docker">
+                        <h4>Docker Compose</h4>
+                        <p>Conteneurs API, Front et Base de données locaux.</p>
+                    </div>
+                    <div class="select-card selected" id="devops-jenkins">
+                        <h4>Jenkins CI/CD</h4>
+                        <p>Fichier Jenkinsfile pour build et déploiement.</p>
+                    </div>
+                    <div class="select-card" id="devops-k8s">
+                        <h4>Kubernetes</h4>
+                        <p>Manifestes YAML de Déploiement et de Service.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Preview Panel: Code Preview and file tree -->
+        <aside class="preview-panel">
+            <div class="preview-header">
+                <h4>Aperçu du projet</h4>
+            </div>
+            <div class="preview-body">
+                <label>Commande CLI équivalente</label>
+                <div class="cli-box" id="cli-command">
+                    npx @webpick/cli init --backend spring --frontend angular
+                </div>
+                
+                <label>Fichiers générés</label>
+                <ul class="file-tree" id="file-tree-viewer">
+                    <!-- Contenu dynamique de l'arbre -->
+                </ul>
+
+                <label style="margin-top: 12px; display: block;">Contenu du fichier sélectionné</label>
+                <pre id="code-content" style="background: #070913; border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius); font-family: var(--font-mono); font-size: 0.8rem; color: #a5f3fc; overflow: auto; max-height: 350px; white-space: pre;"></pre>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Catalogue de dépendances dynamique par Backend (Étape 2)
+        const DEPENDENCY_CATALOG = {
+            spring: [
+                { id: "spring-security", name: "Spring Security", desc: "Authentification JWT, CORS et défenses CSRF.", checked: true },
+                { id: "mapstruct", name: "MapStruct Mappers", desc: "Mapping et isolation stricte entre DTO et Entités.", checked: true },
+                { id: "validation", name: "Spring Validation", desc: "Validation automatique de DTOs via javax.validation.", checked: true },
+                { id: "lombok", name: "Lombok", desc: "Génération automatique des getters, setters et constructeurs.", checked: true },
+                { id: "jpa", name: "Spring Data JPA", desc: "Couche d'accès aux données avec Hibernate par défaut.", checked: true }
+            ],
+            django: [
+                { id: "drf", name: "Django REST Framework", desc: "Moteur de sérialisation et routage d'API REST robuste.", checked: true },
+                { id: "simplejwt", name: "DRF SimpleJWT", desc: "Authentification sécurisée par Token JWT.", checked: true },
+                { id: "corsheaders", name: "CORS Headers", desc: "Configuration simplifiée des requêtes cross-origin.", checked: true },
+                { id: "environ", name: "Django Environ", desc: "Gestion propre des variables de configuration (.env).", checked: true }
+            ],
+            express: [
+                { id: "helmet", name: "Helmet Security", desc: "Protection contre les faiblesses courantes en configurant les headers HTTP.", checked: true },
+                { id: "cors", name: "CORS Setup", desc: "Configuration de partage des ressources cross-origin.", checked: true },
+                { id: "zod", name: "Zod Schema Validation", desc: "Validation stricte des structures JSON et de typage TS.", checked: true },
+                { id: "jsonwebtoken", name: "JSON Web Token", desc: "Génération et vérification asynchrone des tokens JWT.", checked: true },
+                { id: "prisma", name: "Prisma ORM", desc: "Modélisation de données et requêtes SQL typées.", checked: true }
+            ]
+        };
+
+        // Rendu dynamique des dépendances
+        function renderDependencies(backend) {
+            const container = document.getElementById('security-checkboxes');
+            container.innerHTML = '';
+            
+            const deps = DEPENDENCY_CATALOG[backend] || [];
+            deps.forEach(dep => {
+                const card = document.createElement('div');
+                card.className = `select-card ${dep.checked ? 'selected' : ''}`;
+                card.setAttribute('data-dep-id', dep.id);
+                card.innerHTML = `
+                    <h4>${dep.name}</h4>
+                    <p>${dep.desc}</p>
+                `;
+                
+                card.addEventListener('click', () => {
+                    card.classList.toggle('selected');
+                    dep.checked = card.classList.contains('selected');
+                    updateCLI();
+                });
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Commutation des cartes Backend
+        document.querySelectorAll('#backend-cards .select-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#backend-cards .select-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                
+                const val = card.getAttribute('data-value');
+                document.querySelectorAll('.dynamic-group').forEach(group => group.classList.remove('active'));
+                const target = document.getElementById(`fields-${val}`);
+                if (target) target.classList.add('active');
+                
+                document.getElementById('sum-backend').innerText = card.querySelector('h4').innerText;
+                
+                // Charger les dépendances du nouveau backend
+                renderDependencies(val);
+                updateCLI();
+            });
+        });
+
+        // Toggle des cartes DevOps
+        document.querySelectorAll('.grid-3 .select-card:not(#backend-cards .select-card)').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('selected');
+                updateCLI();
+            });
+        });
+
+        document.getElementById('frontend-select').addEventListener('change', (e) => {
+            const label = e.target.options[e.target.selectedIndex].text.split(' ')[0];
+            document.getElementById('sum-frontend').innerText = label;
+            updateCLI();
+        });
+
+        document.getElementById('db-select').addEventListener('change', (e) => {
+            const label = e.target.options[e.target.selectedIndex].text.split(' ')[0];
+            document.getElementById('sum-db').innerText = label;
+            updateCLI();
+        });
+
+        // Générateur de modèles de fichiers virtuels (Étape 3)
+        function generateVirtualFiles() {
+            const files = {};
+            const backend = document.querySelector('#backend-cards .select-card.selected').getAttribute('data-value');
+            const frontend = document.getElementById('frontend-select').value;
+            const db = document.getElementById('db-select').value;
+            
+            const springGroup = document.getElementById('spring-group').value || 'com.example';
+            const springArtifact = document.getElementById('spring-artifact').value || 'demo';
+            const springLang = document.getElementById('spring-lang').value;
+            const springBuild = document.getElementById('spring-build').value;
+            
+            const djangoProject = document.getElementById('django-project').value || 'my_django_project';
+            const djangoPy = document.getElementById('django-py').value;
+            const djangoPkg = document.getElementById('django-pkg').value;
+            
+            const expressLang = document.getElementById('express-lang').value;
+            const expressPkg = document.getElementById('express-pkg').value;
+
+            const activeDeps = (DEPENDENCY_CATALOG[backend] || []).filter(d => d.checked).map(d => d.id);
+            
+            const dockerEnabled = document.getElementById('devops-docker').classList.contains('selected');
+            const jenkinsEnabled = document.getElementById('devops-jenkins').classList.contains('selected');
+            const k8sEnabled = document.getElementById('devops-k8s').classList.contains('selected');
+
+            // 1. Fichiers Backend
+            if (backend === 'spring') {
+                const jVersion = springLang.includes('21') ? '21' : '17';
+                let buildFile = '';
+                if (springBuild === 'Maven') {
+                    let depXml = '';
+                    activeDeps.forEach(id => {
+                        depXml += `\n        <dependency>\n            <groupId>org.webpick</groupId>\n            <artifactId>${id}</artifactId>\n        </dependency>`;
+                    });
+                    buildFile = `<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.3</version>
+        <relativePath/>
+    </parent>
+    <groupId>${springGroup}</groupId>
+    <artifactId>${springArtifact}</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>${springArtifact}</name>
+    <description>Projet généré par Webpick Initializr</description>
+    <properties>
+        <java.version>${jVersion}</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>${depXml}
+    </dependencies>
+</project>`;
+                    files['pom.xml'] = buildFile;
+                } else {
+                    let depGradle = '';
+                    activeDeps.forEach(id => {
+                        depGradle += `\n    implementation 'org.webpick:${id}'`;
+                    });
+                    buildFile = `plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = '${springGroup}'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(${jVersion})
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'${depGradle}
+}`;
+                    files['build.gradle'] = buildFile;
+                }
+
+                files['src/main/resources/application.yml'] = `spring:
+  application:
+    name: ${springArtifact}
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${springArtifact.replace(/-/g, '_')}
+    username: webpick
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true`;
+
+                const packagePath = springGroup.replace(/\./g, '/');
+                files[`src/main/java/${packagePath}/${springArtifact.replace(/-/g, '')}/Application.java`] = `package ${springGroup}.${springArtifact.replace(/-/g, '')};
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}`;
+            } else if (backend === 'django') {
+                files['manage.py'] = `#!/usr/bin/env python
+import os
+import sys
+
+def main():
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', '${djangoProject}.settings')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError("Couldn't import Django.") from exc
+    execute_from_command_line(sys.argv)
+
+if __name__ == '__main__':
+    main()`;
+
+                files[`${djangoProject}/settings.py`] = `import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = 'webpick-super-secret-key-initializr'
+DEBUG = True
+ALLOWED_HOSTS = []
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Modules et dépendances
+    ${activeDeps.map(d => `'${d}',`).join('\n    ')}
+]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '${djangoProject}',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}`;
+            } else if (backend === 'express') {
+                const isTS = expressLang === 'TypeScript';
+                const fileExt = isTS ? 'ts' : 'js';
+                
+                let depJSON = '';
+                activeDeps.forEach(id => {
+                    depJSON += `\n    "${id}": "latest",`;
+                });
+
+                files['package.json'] = `{
+  "name": "express-api",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "${isTS ? 'ts-node-dev --respawn src/index.ts' : 'nodemon src/index.js'}",
+    "build": "${isTS ? 'tsc' : 'echo \"No build needed\"'}"
+  },
+  "dependencies": {
+    "express": "^4.19.0",${depJSON}
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "${isTS ? 'typescript\": \"^5.4.2' : 'nodemon\": \"^3.1.0'}"
+  }
+}`;
+
+                files[`src/index.${fileExt}`] = `import express from 'express';
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+app.use(express.json());
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'UP', service: 'express-api' });
+});
+
+app.listen(PORT, () => {
+  console.log(\`Server is running on port \${PORT}\`);
+});`;
+            }
+
+            // 2. Fichiers Frontend
+            if (frontend !== 'none') {
+                files[`frontend/package.json`] = `{
+  "name": "frontend-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "${frontend === 'angular' ? 'ng serve' : 'vite'}",
+    "build": "${frontend === 'angular' ? 'ng build' : 'tsc && vite build'}"
+  },
+  "dependencies": {
+    "${frontend === 'angular' ? '@angular/core": "^17.0.0' : 'react": "^18.2.0'}"
+  }
+}`;
+            }
+
+            // 3. DevOps files
+            if (dockerEnabled) {
+                files['docker-compose.yml'] = `version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://db:5432/webpick
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=webpick
+      - POSTGRES_USER=webpick
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:`;
+            }
+
+            if (jenkinsEnabled) {
+                files['Jenkinsfile'] = `pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY = 'registry.webpick.com'
+        APP_NAME = 'core-service'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build & Unit Tests') {
+            steps {
+                echo 'Compiling source code...'
+            }
+        }
+        stage('Docker Image Push') {
+            steps {
+                echo 'Pushing Docker image to registry...'
+            }
+        }
+    }
+}`;
+            }
+
+            if (k8sEnabled) {
+                files['k8s/deployment.yml'] = `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-service-deployment
+  labels:
+    app: core-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: core-service
+  template:
+    metadata:
+      labels:
+        app: core-service
+    spec:
+      containers:
+      - name: core-service
+        image: registry.webpick.com/core-service:latest
+        ports:
+        - containerPort: 8080`;
+            }
+
+            return files;
+        }
+
+        // Rendu de l'arbre et du visualiseur de fichiers
+        function renderFileTree() {
+            const treeContainer = document.getElementById('file-tree-viewer');
+            const codeContainer = document.getElementById('code-content');
+            
+            // Conserver le fichier actif si possible
+            const activeItem = treeContainer.querySelector('.file-tree-item.active');
+            let activePath = activeItem ? activeItem.getAttribute('data-path') : null;
+
+            treeContainer.innerHTML = '';
+            const virtualFiles = generateVirtualFiles();
+            const filePaths = Object.keys(virtualFiles);
+
+            if (filePaths.length === 0) {
+                codeContainer.innerText = 'Aucun fichier généré.';
+                return;
+            }
+
+            if (!activePath || !virtualFiles[activePath]) {
+                activePath = filePaths[0];
+            }
+
+            filePaths.forEach((path) => {
+                const li = document.createElement('li');
+                li.className = `file-tree-item ${path === activePath ? 'active' : ''}`;
+                li.setAttribute('data-path', path);
+                li.innerText = `📄 ${path}`;
+                
+                li.addEventListener('click', () => {
+                    document.querySelectorAll('.file-tree-item').forEach(item => item.classList.remove('active'));
+                    li.classList.add('active');
+                    codeContainer.innerText = virtualFiles[path];
+                });
+
+                treeContainer.appendChild(li);
+            });
+
+            codeContainer.innerText = virtualFiles[activePath];
+        }
+
+        // Mise à jour de la ligne de commande CLI (inclut les dépendances et DevOps)
+        function updateCLI() {
+            const backend = document.querySelector('#backend-cards .select-card.selected').getAttribute('data-value');
+            const frontend = document.getElementById('frontend-select').value;
+            const db = document.getElementById('db-select').value;
+            
+            // Récupérer dépendances actives
+            const activeDeps = (DEPENDENCY_CATALOG[backend] || [])
+                .filter(d => d.checked)
+                .map(d => d.id)
+                .join(',');
+
+            // Récupérer modules DevOps actifs
+            const activeDevops = [];
+            if (document.getElementById('devops-docker').classList.contains('selected')) activeDevops.push('docker');
+            if (document.getElementById('devops-jenkins').classList.contains('selected')) activeDevops.push('jenkins');
+            if (document.getElementById('devops-k8s').classList.contains('selected')) activeDevops.push('k8s');
+            
+            let cmd = `npx @webpick/cli init --backend ${backend} --frontend ${frontend} --db ${db}`;
+            if (activeDeps) cmd += ` --deps ${activeDeps}`;
+            if (activeDevops.length > 0) cmd += ` --devops ${activeDevops.join(',')}`;
+
+            document.getElementById('cli-command').innerText = cmd;
+
+            // Mettre à jour l'aperçu des fichiers
+            renderFileTree();
+        }
+
+        // Écouteurs sur les entrées textuelles et de sélection pour la réactivité totale
+        const inputSelector = 'input[type="text"], select';
+        document.querySelectorAll(inputSelector).forEach(input => {
+            input.addEventListener('input', updateCLI);
+            input.addEventListener('change', updateCLI);
+        });
+
+        // Téléchargement du projet sous format ZIP (Étape 4 & 5)
+        document.getElementById('btn-generate').addEventListener('click', async () => {
+            const btn = document.getElementById('btn-generate');
+            const originalText = btn.innerText;
+            btn.innerText = 'Génération en cours...';
+            btn.disabled = true;
+
+            // Collecte des données choisies
+            const backend = document.querySelector('#backend-cards .select-card.selected').getAttribute('data-value');
+            const frontend = document.getElementById('frontend-select').value;
+            const db = document.getElementById('db-select').value;
+            const activeDeps = (DEPENDENCY_CATALOG[backend] || []).filter(d => d.checked).map(d => d.id);
+            const activeDevops = [];
+            if (document.getElementById('devops-docker').classList.contains('selected')) activeDevops.push('docker');
+            if (document.getElementById('devops-jenkins').classList.contains('selected')) activeDevops.push('jenkins');
+            if (document.getElementById('devops-k8s').classList.contains('selected')) activeDevops.push('k8s');
+
+            const springGroup = document.getElementById('spring-group')?.value || 'com.webpick';
+            const springArtifact = document.getElementById('spring-artifact')?.value || 'core-service';
+            const djangoProject = document.getElementById('django-project')?.value || 'webpick_core';
+
+            const payload = {
+                backend,
+                frontend,
+                db,
+                deps: activeDeps,
+                devops: activeDevops,
+                metadata: {
+                    groupId: springGroup,
+                    artifactId: springArtifact,
+                    projectName: djangoProject
+                }
+            };
+
+            const filename = `${backend === 'spring' ? springArtifact : backend === 'django' ? djangoProject : 'express-api'}-project.zip`;
+
+            try {
+                // Tentative 1 : Envoi de la demande au backend réel via l'API REST
+                console.log("Tentative de génération sur le serveur...");
+                const response = await fetch('/api/v1/projects/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    downloadBlob(blob, filename);
+                    console.log("Génération serveur réussie !");
+                    return;
+                }
+                throw new Error("Serveur injoignable ou en erreur. Utilisation du fallback client-side.");
+            } catch (err) {
+                console.warn(err.message);
+                
+                // Tentative 2 : Fallback de génération locale côté client (Offline-First)
+                try {
+                    const zip = new JSZip();
+                    const virtualFiles = generateVirtualFiles();
+                    
+                    Object.keys(virtualFiles).forEach(path => {
+                        zip.file(path, virtualFiles[path]);
+                    });
+
+                    const content = await zip.generateAsync({ type: 'blob' });
+                    downloadBlob(content, filename);
+                    console.log("Génération client-side réussie !");
+                } catch (zipErr) {
+                    console.error(zipErr);
+                    alert("Erreur lors de la compilation locale du ZIP.");
+                }
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Utilitaire de téléchargement du fichier blob
+        function downloadBlob(blob, filename) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialisation par défaut
+        renderDependencies('spring');
+        updateCLI();
+    </script>
+</body>
+</html>
