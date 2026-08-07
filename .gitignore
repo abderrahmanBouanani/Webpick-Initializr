@@ -22,3 +22,9 @@
 *.toc
 *.synctex.gz
 **/logs/
+
+# Agent/State Walkthrough & Summaries
+state_walkthrough.md
+.agents/
+conversation_summary.md
+
