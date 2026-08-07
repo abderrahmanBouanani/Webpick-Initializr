@@ -28,7 +28,7 @@ public class ExpressGeneratorAdapter implements IStackGeneratorStrategy {
 
     @Override
     public boolean supports(FrontendFramework frameworkType) {
-        return false;
+        return frameworkType == FrontendFramework.NONE;
     }
 
     @Override
@@ -40,6 +40,7 @@ public class ExpressGeneratorAdapter implements IStackGeneratorStrategy {
             Map<String, Object> data = new HashMap<>();
             data.put("projectName", context.getProjectName());
             data.put("dependencies", context.getSelectedDependencies());
+            data.put("database", context.getDatabaseType() != null ? context.getDatabaseType().name() : "NONE");
 
             // Fichier package.json
             byte[] packageJsonContent = templateEngine.render("express/package.json.ftl", data).getBytes();

@@ -28,7 +28,7 @@ public class DjangoGeneratorAdapter implements IStackGeneratorStrategy {
 
     @Override
     public boolean supports(FrontendFramework frameworkType) {
-        return false;
+        return frameworkType == FrontendFramework.NONE;
     }
 
     @Override
@@ -41,6 +41,7 @@ public class DjangoGeneratorAdapter implements IStackGeneratorStrategy {
             Map<String, Object> data = new HashMap<>();
             data.put("projectName", projectName);
             data.put("dependencies", context.getSelectedDependencies());
+            data.put("database", context.getDatabaseType() != null ? context.getDatabaseType().name() : "SQLITE");
 
             // Fichier manage.py
             byte[] managePyContent = templateEngine.render("django/manage.py.ftl", data).getBytes();
