@@ -11,16 +11,17 @@ import org.springframework.stereotype.Repository;
 
 @Component
 public class PostgresConfigAdapter implements IConfigRepositoryPort {
-    HistoryRepository repository;
-    HistoryEntityMapper mapper;
+    private final HistoryRepository repository;
+    private final HistoryEntityMapper mapper;
 
-    public PostgresConfigAdapter(HistoryRepository historyRepository) {
+    public PostgresConfigAdapter(HistoryRepository historyRepository, HistoryEntityMapper mapper) {
         this.repository = historyRepository;
+        this.mapper = mapper;
     }
 
     @Override
     public void saveHistory(GenerationContext context) {
-        HistoryEntity entity =  mapper.toEntity(context);
+        HistoryEntity entity = mapper.toEntity(context);
         repository.save(entity);
     }
 }

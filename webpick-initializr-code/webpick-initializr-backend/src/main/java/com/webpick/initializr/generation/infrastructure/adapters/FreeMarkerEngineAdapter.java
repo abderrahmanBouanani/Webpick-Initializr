@@ -32,7 +32,7 @@ public class FreeMarkerEngineAdapter implements ITemplateEnginePort {
             template.process(data, writer);
             return writer.toString();
         } catch (Exception e) {
-            throw new RuntimeException("Erreur lors du rendu du template FreeMarker: " + templateName, e);
+            throw new RuntimeException("Erreur lors du rendu du template FreeMarker: " + templateName + " -> " + e.getMessage(), e);
         }
     }
 }

@@ -28,7 +28,7 @@ public class SpringGeneratorAdapter implements IStackGeneratorStrategy {
 
     @Override
     public boolean supports(FrontendFramework frameworkType) {
-        return false;
+        return frameworkType == FrontendFramework.NONE;
     }
 
     @Override
