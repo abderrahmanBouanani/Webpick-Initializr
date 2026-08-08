@@ -51,9 +51,29 @@ public class DjangoGeneratorAdapter implements IStackGeneratorStrategy {
             byte[] settingsContent = templateEngine.render("django/settings.py.ftl", data).getBytes();
             Files.write(projectDir.resolve("settings.py"), settingsContent);
 
+            // Fichier __init__.py
+            byte[] initContent = templateEngine.render("django/__init__.py.ftl", data).getBytes();
+            Files.write(projectDir.resolve("__init__.py"), initContent);
+
+            // Fichier urls.py
+            byte[] urlsContent = templateEngine.render("django/urls.py.ftl", data).getBytes();
+            Files.write(projectDir.resolve("urls.py"), urlsContent);
+
+            // Fichier wsgi.py
+            byte[] wsgiContent = templateEngine.render("django/wsgi.py.ftl", data).getBytes();
+            Files.write(projectDir.resolve("wsgi.py"), wsgiContent);
+
+            // Fichier asgi.py
+            byte[] asgiContent = templateEngine.render("django/asgi.py.ftl", data).getBytes();
+            Files.write(projectDir.resolve("asgi.py"), asgiContent);
+
             // Fichier requirements.txt
             byte[] reqsContent = templateEngine.render("django/requirements.txt.ftl", data).getBytes();
             Files.write(targetPath.resolve("requirements.txt"), reqsContent);
+
+            // Fichier .gitignore
+            byte[] gitignoreContent = templateEngine.render("django/gitignore.ftl", data).getBytes();
+            Files.write(targetPath.resolve(".gitignore"), gitignoreContent);
 
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la génération du projet Django", e);

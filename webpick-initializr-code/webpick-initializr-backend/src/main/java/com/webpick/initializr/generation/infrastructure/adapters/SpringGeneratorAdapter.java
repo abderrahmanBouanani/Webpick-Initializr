@@ -67,6 +67,10 @@ public class SpringGeneratorAdapter implements IStackGeneratorStrategy {
                 Files.write(targetPath.resolve("pom.xml"), buildContent);
                 // Note : Ici on copierait aussi mvnw et le dossier .mvn/
             }
+
+            // 5. Génération du fichier .gitignore
+            byte[] gitignoreContent = templateEngine.render("spring/gitignore.ftl", templateData).getBytes();
+            Files.write(targetPath.resolve(".gitignore"), gitignoreContent);
         } catch (IOException e) {
             throw new RuntimeException("Erreur critique d'E/S lors de la génération du projet Spring Boot", e);
         }

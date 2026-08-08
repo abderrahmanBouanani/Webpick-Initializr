@@ -36,9 +36,11 @@ public class SymfonyGeneratorAdapter implements IStackGeneratorStrategy {
         try {
             Path configDir = targetPath.resolve("config");
             Path publicDir = targetPath.resolve("public");
+            Path srcDir = targetPath.resolve("src");
 
             Files.createDirectories(configDir);
             Files.createDirectories(publicDir);
+            Files.createDirectories(srcDir);
 
             Map<String, Object> data = new HashMap<>();
             data.put("projectName", context.getProjectName());
@@ -56,6 +58,22 @@ public class SymfonyGeneratorAdapter implements IStackGeneratorStrategy {
             // .env
             byte[] envContent = templateEngine.render("symfony/env.ftl", data).getBytes();
             Files.write(targetPath.resolve(".env"), envContent);
+
+            // src/Kernel.php
+            byte[] kernelContent = templateEngine.render("symfony/Kernel.php.ftl", data).getBytes();
+            Files.write(srcDir.resolve("Kernel.php"), kernelContent);
+
+            // config/bundles.php
+            byte[] bundlesContent = templateEngine.render("symfony/bundles.php.ftl", data).getBytes();
+            Files.write(configDir.resolve("bundles.php"), bundlesContent);
+
+            // config/routes.yaml
+            byte[] routesContent = templateEngine.render("symfony/routes.yaml.ftl", data).getBytes();
+            Files.write(configDir.resolve("routes.yaml"), routesContent);
+
+            // Fichier .gitignore
+            byte[] gitignoreContent = templateEngine.render("symfony/gitignore.ftl", data).getBytes();
+            Files.write(targetPath.resolve(".gitignore"), gitignoreContent);
 
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la génération du projet Symfony", e);

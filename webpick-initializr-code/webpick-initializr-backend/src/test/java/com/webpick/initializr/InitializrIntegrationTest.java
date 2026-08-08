@@ -66,6 +66,7 @@ class InitializrIntegrationTest {
         boolean foundPomXml = false;
         boolean foundDockerCompose = false;
         boolean foundJenkinsfile = false;
+        boolean foundGitignore = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -79,6 +80,8 @@ class InitializrIntegrationTest {
                     foundDockerCompose = true;
                 } else if (name.endsWith("Jenkinsfile")) {
                     foundJenkinsfile = true;
+                } else if (name.endsWith(".gitignore")) {
+                    foundGitignore = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -88,6 +91,7 @@ class InitializrIntegrationTest {
         assertTrue(foundPomXml, "pom.xml should be generated");
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
         assertTrue(foundJenkinsfile, "Jenkinsfile should be generated");
+        assertTrue(foundGitignore, ".gitignore should be generated");
     }
 
     @Test
@@ -123,6 +127,11 @@ class InitializrIntegrationTest {
         boolean foundSettingsPy = false;
         boolean foundRequirementsTxt = false;
         boolean foundDockerCompose = false;
+        boolean foundGitignore = false;
+        boolean foundInitPy = false;
+        boolean foundUrlsPy = false;
+        boolean foundWsgiPy = false;
+        boolean foundAsgiPy = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -136,6 +145,16 @@ class InitializrIntegrationTest {
                     foundRequirementsTxt = true;
                 } else if (name.endsWith("docker-compose.yml")) {
                     foundDockerCompose = true;
+                } else if (name.endsWith(".gitignore")) {
+                    foundGitignore = true;
+                } else if (name.endsWith("__init__.py")) {
+                    foundInitPy = true;
+                } else if (name.endsWith("urls.py")) {
+                    foundUrlsPy = true;
+                } else if (name.endsWith("wsgi.py")) {
+                    foundWsgiPy = true;
+                } else if (name.endsWith("asgi.py")) {
+                    foundAsgiPy = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -145,6 +164,11 @@ class InitializrIntegrationTest {
         assertTrue(foundSettingsPy, "settings.py should be generated");
         assertTrue(foundRequirementsTxt, "requirements.txt should be generated");
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
+        assertTrue(foundGitignore, ".gitignore should be generated");
+        assertTrue(foundInitPy, "__init__.py should be generated");
+        assertTrue(foundUrlsPy, "urls.py should be generated");
+        assertTrue(foundWsgiPy, "wsgi.py should be generated");
+        assertTrue(foundAsgiPy, "asgi.py should be generated");
     }
 
     @Test
@@ -179,6 +203,7 @@ class InitializrIntegrationTest {
         boolean foundPackageJson = false;
         boolean foundIndexJs = false;
         boolean foundDockerCompose = false;
+        boolean foundGitignore = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -190,6 +215,8 @@ class InitializrIntegrationTest {
                     foundIndexJs = true;
                 } else if (name.endsWith("docker-compose.yml")) {
                     foundDockerCompose = true;
+                } else if (name.endsWith(".gitignore")) {
+                    foundGitignore = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -198,6 +225,7 @@ class InitializrIntegrationTest {
         assertTrue(foundPackageJson, "package.json should be generated");
         assertTrue(foundIndexJs, "index.js should be generated");
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
+        assertTrue(foundGitignore, ".gitignore should be generated");
     }
 
     @Test
@@ -233,6 +261,10 @@ class InitializrIntegrationTest {
         boolean foundIndexPhp = false;
         boolean foundEnv = false;
         boolean foundDockerCompose = false;
+        boolean foundGitignore = false;
+        boolean foundKernelPhp = false;
+        boolean foundBundlesPhp = false;
+        boolean foundRoutesYaml = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -246,6 +278,14 @@ class InitializrIntegrationTest {
                     foundEnv = true;
                 } else if (name.endsWith("docker-compose.yml")) {
                     foundDockerCompose = true;
+                } else if (name.endsWith(".gitignore")) {
+                    foundGitignore = true;
+                } else if (name.endsWith("Kernel.php")) {
+                    foundKernelPhp = true;
+                } else if (name.endsWith("bundles.php")) {
+                    foundBundlesPhp = true;
+                } else if (name.endsWith("routes.yaml")) {
+                    foundRoutesYaml = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -255,6 +295,10 @@ class InitializrIntegrationTest {
         assertTrue(foundIndexPhp, "index.php should be generated");
         assertTrue(foundEnv, ".env should be generated");
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
+        assertTrue(foundGitignore, ".gitignore should be generated");
+        assertTrue(foundKernelPhp, "Kernel.php should be generated");
+        assertTrue(foundBundlesPhp, "bundles.php should be generated");
+        assertTrue(foundRoutesYaml, "routes.yaml should be generated");
     }
 }
 

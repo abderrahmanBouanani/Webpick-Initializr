@@ -1,0 +1,12 @@
+target/
+build/
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+.recommenders/
+.metadata/
+bin/
+*.log

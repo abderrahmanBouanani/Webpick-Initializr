@@ -50,6 +50,10 @@ public class ExpressGeneratorAdapter implements IStackGeneratorStrategy {
             byte[] indexContent = templateEngine.render("express/index.js.ftl", data).getBytes();
             Files.write(srcDir.resolve("index.js"), indexContent);
 
+            // Fichier .gitignore
+            byte[] gitignoreContent = templateEngine.render("express/gitignore.ftl", data).getBytes();
+            Files.write(targetPath.resolve(".gitignore"), gitignoreContent);
+
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la génération du projet Express", e);
         }
