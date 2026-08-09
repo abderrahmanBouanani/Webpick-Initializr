@@ -38,6 +38,7 @@ class DevOpsTemplateAdapterTest {
         adapter.generatePipelines(context, tempDir);
 
         assertTrue(Files.exists(tempDir.resolve("docker-compose.yml")));
+        assertTrue(Files.exists(tempDir.resolve("Dockerfile")));
         assertTrue(Files.exists(tempDir.resolve("Jenkinsfile")));
         assertTrue(Files.exists(tempDir.resolve("k8s/deployment.yml")));
     }

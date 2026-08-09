@@ -25,11 +25,24 @@ public class DevOpsTemplateAdapter implements IDevOpsGeneratorPort {
             Map<String, Object> templateData = new HashMap<>();
             templateData.put("projectName", context.getProjectName());
             templateData.put("databaseType", context.getDatabaseType() != null ? context.getDatabaseType().name() : "");
+            templateData.put("backendFramework", context.getBackendFramework() != null ? context.getBackendFramework().name() : "");
+            templateData.put("buildTool", context.getMetadata("buildTool") != null ? context.getMetadata("buildTool") : "Maven");
+            templateData.put("javaVersion", context.getMetadata("javaVersion") != null ? context.getMetadata("javaVersion") : "17");
 
             // Utilisation des méthodes métiers du domaine (Clean Architecture)
             if (context.isDockerEnabled()) {
                 byte[] dockerContent = templateEngine.render("devops/docker-compose.yml.ftl", templateData).getBytes();
                 Files.write(targetPath.resolve("docker-compose.yml"), dockerContent);
+
+                String dockerfileTemplate = switch (context.getBackendFramework()) {
+                    case SPRING -> "devops/Dockerfile_spring.ftl";
+                    case EXPRESS -> "devops/Dockerfile_express.ftl";
+                    case DJANGO -> "devops/Dockerfile_django.ftl";
+                    case SYMFONY -> "devops/Dockerfile_symfony.ftl";
+                };
+
+                byte[] dockerfileContent = templateEngine.render(dockerfileTemplate, templateData).getBytes();
+                Files.write(targetPath.resolve("Dockerfile"), dockerfileContent);
             }
 
             if (context.isJenkinsEnabled()) {

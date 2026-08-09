@@ -67,6 +67,7 @@ class InitializrIntegrationTest {
         boolean foundDockerCompose = false;
         boolean foundJenkinsfile = false;
         boolean foundGitignore = false;
+        boolean foundDockerfile = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -82,6 +83,8 @@ class InitializrIntegrationTest {
                     foundJenkinsfile = true;
                 } else if (name.endsWith(".gitignore")) {
                     foundGitignore = true;
+                } else if (name.endsWith("Dockerfile")) {
+                    foundDockerfile = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -92,6 +95,7 @@ class InitializrIntegrationTest {
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
         assertTrue(foundJenkinsfile, "Jenkinsfile should be generated");
         assertTrue(foundGitignore, ".gitignore should be generated");
+        assertTrue(foundDockerfile, "Dockerfile should be generated");
     }
 
     @Test
@@ -132,6 +136,7 @@ class InitializrIntegrationTest {
         boolean foundUrlsPy = false;
         boolean foundWsgiPy = false;
         boolean foundAsgiPy = false;
+        boolean foundDockerfile = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -155,6 +160,8 @@ class InitializrIntegrationTest {
                     foundWsgiPy = true;
                 } else if (name.endsWith("asgi.py")) {
                     foundAsgiPy = true;
+                } else if (name.endsWith("Dockerfile")) {
+                    foundDockerfile = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -169,6 +176,7 @@ class InitializrIntegrationTest {
         assertTrue(foundUrlsPy, "urls.py should be generated");
         assertTrue(foundWsgiPy, "wsgi.py should be generated");
         assertTrue(foundAsgiPy, "asgi.py should be generated");
+        assertTrue(foundDockerfile, "Dockerfile should be generated");
     }
 
     @Test
@@ -204,6 +212,7 @@ class InitializrIntegrationTest {
         boolean foundIndexJs = false;
         boolean foundDockerCompose = false;
         boolean foundGitignore = false;
+        boolean foundDockerfile = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -217,6 +226,8 @@ class InitializrIntegrationTest {
                     foundDockerCompose = true;
                 } else if (name.endsWith(".gitignore")) {
                     foundGitignore = true;
+                } else if (name.endsWith("Dockerfile")) {
+                    foundDockerfile = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -226,6 +237,7 @@ class InitializrIntegrationTest {
         assertTrue(foundIndexJs, "index.js should be generated");
         assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
         assertTrue(foundGitignore, ".gitignore should be generated");
+        assertTrue(foundDockerfile, "Dockerfile should be generated");
     }
 
     @Test
@@ -265,6 +277,7 @@ class InitializrIntegrationTest {
         boolean foundKernelPhp = false;
         boolean foundBundlesPhp = false;
         boolean foundRoutesYaml = false;
+        boolean foundDockerfile = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -286,6 +299,8 @@ class InitializrIntegrationTest {
                     foundBundlesPhp = true;
                 } else if (name.endsWith("routes.yaml")) {
                     foundRoutesYaml = true;
+                } else if (name.endsWith("Dockerfile")) {
+                    foundDockerfile = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -299,6 +314,7 @@ class InitializrIntegrationTest {
         assertTrue(foundKernelPhp, "Kernel.php should be generated");
         assertTrue(foundBundlesPhp, "bundles.php should be generated");
         assertTrue(foundRoutesYaml, "routes.yaml should be generated");
+        assertTrue(foundDockerfile, "Dockerfile should be generated");
     }
 }
 
