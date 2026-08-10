@@ -68,6 +68,9 @@ class InitializrIntegrationTest {
         boolean foundJenkinsfile = false;
         boolean foundGitignore = false;
         boolean foundDockerfile = false;
+        boolean foundMvnw = false;
+        boolean foundMvnwCmd = false;
+        boolean foundMvnwProps = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -85,6 +88,12 @@ class InitializrIntegrationTest {
                     foundGitignore = true;
                 } else if (name.endsWith("Dockerfile")) {
                     foundDockerfile = true;
+                } else if (name.endsWith("mvnw")) {
+                    foundMvnw = true;
+                } else if (name.endsWith("mvnw.cmd")) {
+                    foundMvnwCmd = true;
+                } else if (name.endsWith("maven-wrapper.properties")) {
+                    foundMvnwProps = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -96,6 +105,86 @@ class InitializrIntegrationTest {
         assertTrue(foundJenkinsfile, "Jenkinsfile should be generated");
         assertTrue(foundGitignore, ".gitignore should be generated");
         assertTrue(foundDockerfile, "Dockerfile should be generated");
+        assertTrue(foundMvnw, "mvnw should be generated");
+        assertTrue(foundMvnwCmd, "mvnw.cmd should be generated");
+        assertTrue(foundMvnwProps, "maven-wrapper.properties should be generated");
+    }
+
+    @Test
+    void testEndToEndSpringGradleProjectGeneration() throws Exception {
+        String requestBody = "{\n" +
+                "  \"projectName\": \"test-gradle-app\",\n" +
+                "  \"basePackage\": \"com.webpick.testapp\",\n" +
+                "  \"includeGit\": false,\n" +
+                "  \"backend\": \"SPRING\",\n" +
+                "  \"frontend\": \"NONE\",\n" +
+                "  \"db\": \"MYSQL\",\n" +
+                "  \"deps\": [\"lombok\"],\n" +
+                "  \"devops\": [\"docker\"],\n" +
+                "  \"metadata\": {\n" +
+                "    \"buildTool\": \"Gradle\",\n" +
+                "    \"javaVersion\": \"17\",\n" +
+                "    \"groupId\": \"com.webpick\",\n" +
+                "    \"artifactId\": \"testapp\"\n" +
+                "  }\n" +
+                "}";
+
+        MvcResult result = mockMvc.perform(post("/api/v1/projects/generate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        byte[] zipBytes = result.getResponse().getContentAsByteArray();
+        assertNotNull(zipBytes);
+        assertTrue(zipBytes.length > 0);
+
+        boolean foundApplicationJava = false;
+        boolean foundBuildGradle = false;
+        boolean foundDockerCompose = false;
+        boolean foundGitignore = false;
+        boolean foundDockerfile = false;
+        boolean foundGradlew = false;
+        boolean foundGradlewBat = false;
+        boolean foundGradleJar = false;
+        boolean foundGradleProps = false;
+
+        try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
+            ZipEntry entry;
+            while ((entry = zipInputStream.getNextEntry()) != null) {
+                String name = entry.getName();
+                if (name.endsWith("Application.java")) {
+                    foundApplicationJava = true;
+                } else if (name.endsWith("build.gradle")) {
+                    foundBuildGradle = true;
+                } else if (name.endsWith("docker-compose.yml")) {
+                    foundDockerCompose = true;
+                } else if (name.endsWith(".gitignore")) {
+                    foundGitignore = true;
+                } else if (name.endsWith("Dockerfile")) {
+                    foundDockerfile = true;
+                } else if (name.endsWith("gradlew")) {
+                    foundGradlew = true;
+                } else if (name.endsWith("gradlew.bat")) {
+                    foundGradlewBat = true;
+                } else if (name.endsWith("gradle-wrapper.jar")) {
+                    foundGradleJar = true;
+                } else if (name.endsWith("gradle-wrapper.properties")) {
+                    foundGradleProps = true;
+                }
+                zipInputStream.closeEntry();
+            }
+        }
+
+        assertTrue(foundApplicationJava, "Application.java should be generated");
+        assertTrue(foundBuildGradle, "build.gradle should be generated");
+        assertTrue(foundDockerCompose, "docker-compose.yml should be generated");
+        assertTrue(foundGitignore, ".gitignore should be generated");
+        assertTrue(foundDockerfile, "Dockerfile should be generated");
+        assertTrue(foundGradlew, "gradlew should be generated");
+        assertTrue(foundGradlewBat, "gradlew.bat should be generated");
+        assertTrue(foundGradleJar, "gradle-wrapper.jar should be generated");
+        assertTrue(foundGradleProps, "gradle-wrapper.properties should be generated");
     }
 
     @Test

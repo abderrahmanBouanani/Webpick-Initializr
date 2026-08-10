@@ -61,11 +61,18 @@ public class SpringGeneratorAdapter implements IStackGeneratorStrategy {
             if ("Gradle".equalsIgnoreCase(buildTool)) {
                 byte[] buildContent = templateEngine.render("spring/build.gradle.ftl", templateData).getBytes();
                 Files.write(targetPath.resolve("build.gradle"), buildContent);
-                // Note : Ici on copierait aussi gradlew et le dossier gradle/
+                // Copie du Gradle Wrapper
+                copyResource("/templates/spring/wrappers/gradle/gradlew", targetPath.resolve("gradlew"));
+                copyResource("/templates/spring/wrappers/gradle/gradlew.bat", targetPath.resolve("gradlew.bat"));
+                copyResource("/templates/spring/wrappers/gradle/gradle/wrapper/gradle-wrapper.jar", targetPath.resolve("gradle/wrapper/gradle-wrapper.jar"));
+                copyResource("/templates/spring/wrappers/gradle/gradle/wrapper/gradle-wrapper.properties", targetPath.resolve("gradle/wrapper/gradle-wrapper.properties"));
             } else { // Maven par défaut
                 byte[] buildContent = templateEngine.render("spring/pom.xml.ftl", templateData).getBytes();
                 Files.write(targetPath.resolve("pom.xml"), buildContent);
-                // Note : Ici on copierait aussi mvnw et le dossier .mvn/
+                // Copie du Maven Wrapper
+                copyResource("/templates/spring/wrappers/maven/mvnw", targetPath.resolve("mvnw"));
+                copyResource("/templates/spring/wrappers/maven/mvnw.cmd", targetPath.resolve("mvnw.cmd"));
+                copyResource("/templates/spring/wrappers/maven/.mvn/wrapper/maven-wrapper.properties", targetPath.resolve(".mvn/wrapper/maven-wrapper.properties"));
             }
 
             // 5. Génération du fichier .gitignore
@@ -73,6 +80,18 @@ public class SpringGeneratorAdapter implements IStackGeneratorStrategy {
             Files.write(targetPath.resolve(".gitignore"), gitignoreContent);
         } catch (IOException e) {
             throw new RuntimeException("Erreur critique d'E/S lors de la génération du projet Spring Boot", e);
+        }
+    }
+
+    private void copyResource(String resourcePath, Path targetFile) {
+        try (var is = getClass().getResourceAsStream(resourcePath)) {
+            if (is == null) {
+                throw new RuntimeException("Ressource introuvable dans le classpath: " + resourcePath);
+            }
+            Files.createDirectories(targetFile.getParent());
+            Files.copy(is, targetFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la copie de la ressource " + resourcePath + " vers " + targetFile, e);
         }
     }
 
@@ -85,6 +104,7 @@ public class SpringGeneratorAdapter implements IStackGeneratorStrategy {
         data.put("javaVersion", context.getMetadata("javaVersion")); // ex: "21"
         data.put("groupId", context.getMetadata("groupId")); // ex: "com.webpick"
         data.put("artifactId", context.getMetadata("artifactId")); // ex: "core-service"
+        data.put("database", context.getDatabaseType() != null ? context.getDatabaseType().name() : "POSTGRES");
         return data;
     }
 }

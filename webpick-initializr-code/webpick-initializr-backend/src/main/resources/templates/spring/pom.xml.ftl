@@ -24,15 +24,30 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <#if dependencies?seq_contains("jpa")>
+        <#if (database?? && (database == "POSTGRES" || database == "MYSQL")) || dependencies?seq_contains("jpa")>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <#if database?? && database == "MYSQL">
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <#else>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        </#if>
+        </#if>
+
+        <#if database?? && database == "MONGODB">
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         </#if>
 
