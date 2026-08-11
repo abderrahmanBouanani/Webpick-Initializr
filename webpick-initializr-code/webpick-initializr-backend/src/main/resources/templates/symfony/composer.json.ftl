@@ -17,6 +17,24 @@
         <#if database?? && (database == "POSTGRES" || database == "MYSQL")>
         ,"symfony/orm-pack": "^2.4"
         </#if>
+        <#if dependencies??>
+        <#if dependencies?seq_contains("security")>
+        ,"symfony/security-bundle": "6.3.*"
+        </#if>
+        <#if dependencies?seq_contains("api")>
+        ,"symfony/serializer": "6.3.*"
+        ,"symfony/validator": "6.3.*"
+        </#if>
+        <#if dependencies?seq_contains("twig")>
+        ,"symfony/twig-bundle": "6.3.*"
+        </#if>
+        </#if>
+    },
+    "require-dev": {
+        "symfony/error-handler": "6.3.*"
+        <#if dependencies?? && dependencies?seq_contains("maker")>
+        ,"symfony/maker-bundle": "^1.50"
+        </#if>
     },
     "config": {
         "allow-plugins": {
@@ -28,12 +46,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "${namespaceJson}\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "${namespaceJson}\\Tests\\": "tests/"
         }
     }
 }

@@ -367,6 +367,8 @@ class InitializrIntegrationTest {
         boolean foundBundlesPhp = false;
         boolean foundRoutesYaml = false;
         boolean foundDockerfile = false;
+        boolean foundHomeController = false;
+        boolean foundDoctrineYaml = false;
 
         try (ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
             ZipEntry entry;
@@ -390,6 +392,10 @@ class InitializrIntegrationTest {
                     foundRoutesYaml = true;
                 } else if (name.endsWith("Dockerfile")) {
                     foundDockerfile = true;
+                } else if (name.endsWith("HomeController.php")) {
+                    foundHomeController = true;
+                } else if (name.endsWith("doctrine.yaml")) {
+                    foundDoctrineYaml = true;
                 }
                 zipInputStream.closeEntry();
             }
@@ -404,6 +410,8 @@ class InitializrIntegrationTest {
         assertTrue(foundBundlesPhp, "bundles.php should be generated");
         assertTrue(foundRoutesYaml, "routes.yaml should be generated");
         assertTrue(foundDockerfile, "Dockerfile should be generated");
+        assertTrue(foundHomeController, "HomeController.php should be generated");
+        assertTrue(foundDoctrineYaml, "doctrine.yaml should be generated");
     }
 }
 

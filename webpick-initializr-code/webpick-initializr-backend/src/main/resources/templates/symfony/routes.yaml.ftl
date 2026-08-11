@@ -1,2 +1,5 @@
-# This file defines the routes of your application.
-# For more info, see https://symfony.com/doc/current/routing.html
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: ${namespace}\Controller
+    type: attribute
