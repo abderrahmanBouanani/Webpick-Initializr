@@ -1,0 +1,251 @@
+<div class="app-container">
+  <!-- Left Sidebar (Metadata & Core settings) -->
+  <aside class="sidebar">
+    <div style="margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+      <h1 style="font-size: 16px; font-weight: 700; margin-bottom: 2px; letter-spacing: -0.01em;">WEBPICK INITIALIZR</h1>
+      <p style="font-size: 11px; color: var(--text-muted);">Generate your fullstack codebases</p>
+    </div>
+
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input type="text" id="projectName" name="projectName" class="form-input" [(ngModel)]="projectName" placeholder="e.g. my-app">
+    </div>
+
+    <div class="form-group">
+      <label for="basePackage">Base Package</label>
+      <input type="text" id="basePackage" name="basePackage" class="form-input" [(ngModel)]="basePackage" placeholder="e.g. com.example.demo">
+    </div>
+
+    <!-- Conditional Spring Boot Metadata Fields -->
+    <ng-container *ngIf="selectedBackend === 'SPRING'">
+      <div class="form-group">
+        <label for="groupId">Group ID</label>
+        <input type="text" id="groupId" name="groupId" class="form-input" [(ngModel)]="groupId" placeholder="com.example">
+      </div>
+
+      <div class="form-group">
+        <label for="artifactId">Artifact ID</label>
+        <input type="text" id="artifactId" name="artifactId" class="form-input" [(ngModel)]="artifactId" placeholder="demo">
+      </div>
+
+      <div class="form-group">
+        <label for="javaVersion">Java Version</label>
+        <select id="javaVersion" name="javaVersion" class="form-input" [(ngModel)]="javaVersion">
+          <option value="17">Java 17</option>
+          <option value="21">Java 21</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="buildTool">Build Tool</label>
+        <select id="buildTool" name="buildTool" class="form-input" [(ngModel)]="buildTool">
+          <option value="Maven">Maven</option>
+          <option value="Gradle">Gradle</option>
+        </select>
+      </div>
+    </ng-container>
+
+    <!-- Git Integration -->
+    <div class="form-group" style="margin-top: 10px;">
+      <label class="form-checkbox-label">
+        <input type="checkbox" name="includeGit" class="form-checkbox" [(ngModel)]="includeGit">
+        Include Git Repository
+      </label>
+    </div>
+
+    <div class="form-group" *ngIf="includeGit">
+      <label for="gitToken">Git Personal Access Token</label>
+      <input type="password" id="gitToken" name="gitToken" class="form-input" [(ngModel)]="gitToken" placeholder="ghp_xxxxxxxx">
+    </div>
+
+    <!-- Generate Button -->
+    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" (click)="generate()" [disabled]="loading">
+      <span class="spinner" *ngIf="loading"></span>
+      <span *ngIf="!loading">Generate Project</span>
+      <span *ngIf="loading">Generating...</span>
+    </button>
+  </aside>
+
+  <!-- Main Content Panel (Frameworks, Databases & Dependencies) -->
+  <main class="main-content">
+    <div class="main-container">
+      
+      <!-- Alerts -->
+      <div class="alert alert-error" *ngIf="errorMsg">
+        <button class="alert-close" (click)="clearAlerts()">&times;</button>
+        <strong>Error</strong>
+        <span>{{ errorMsg }}</span>
+      </div>
+
+      <div class="alert alert-success" *ngIf="successMsg">
+        <button class="alert-close" (click)="clearAlerts()">&times;</button>
+        <strong>Success</strong>
+        <span>{{ successMsg }}</span>
+      </div>
+
+      <!-- Backend Framework Selection -->
+      <section>
+        <h2>Backend Framework</h2>
+        <div class="selection-grid">
+          <div class="card" 
+               *ngFor="let option of backends" 
+               [class.active]="selectedBackend === option.value"
+               (click)="selectBackend(option.value)">
+            <div class="card-body">
+              <div class="card-icon-container" *ngIf="option.icon">
+                <i [className]="option.icon"></i>
+              </div>
+              <div class="card-details">
+                <div class="card-header">
+                  <span class="card-title">{{ option.name }}</span>
+                  <span class="card-check-icon" *ngIf="selectedBackend === option.value">✓</span>
+                </div>
+                <div class="card-desc">{{ option.desc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frontend Framework Selection -->
+      <section>
+        <h2>Frontend Framework</h2>
+        <div class="selection-grid">
+          <div class="card" 
+               *ngFor="let option of frontends" 
+               [class.active]="selectedFrontend === option.value"
+               (click)="selectFrontend(option.value)">
+            <div class="card-body">
+              <div class="card-icon-container" *ngIf="option.icon">
+                <i [className]="option.icon"></i>
+              </div>
+              <div class="card-details">
+                <div class="card-header">
+                  <span class="card-title">{{ option.name }}</span>
+                  <span class="card-check-icon" *ngIf="selectedFrontend === option.value">✓</span>
+                </div>
+                <div class="card-desc">{{ option.desc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Database Selection -->
+      <section>
+        <h2>Database</h2>
+        <div class="selection-grid">
+          <div class="card" 
+               *ngFor="let option of databases" 
+               [class.active]="selectedDatabase === option.value"
+               (click)="selectDatabase(option.value)">
+            <div class="card-body">
+              <div class="card-icon-container" *ngIf="option.icon">
+                <i [className]="option.icon"></i>
+              </div>
+              <div class="card-details">
+                <div class="card-header">
+                  <span class="card-title">{{ option.name }}</span>
+                  <span class="card-check-icon" *ngIf="selectedDatabase === option.value">✓</span>
+                </div>
+                <div class="card-desc">{{ option.desc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dependencies Selection -->
+      <section *ngIf="getCurrentDependencies().length > 0">
+        <h2>Dependencies</h2>
+        <p class="subtitle" style="margin-bottom: 12px;">Search and add dependencies to build your application features.</p>
+        
+        <div class="search-results-container">
+          <input type="text" 
+                 class="form-input" 
+                 [placeholder]="'Search dependencies (e.g. ' + (selectedBackend === 'SPRING' ? 'JPA, Security' : selectedBackend === 'SYMFONY' ? 'Security, Twig' : 'CORS, Auth') + ')...'" 
+                 [(ngModel)]="searchQuery"
+                 (focus)="showSearchResults = true"
+                 (blur)="showSearchResults = false">
+                 
+          <!-- Search Dropdown -->
+          <div class="search-results-list" *ngIf="showSearchResults && filteredDependencies.length > 0">
+            <!-- mousedown triggers before blur event closes list -->
+            <div class="search-result-item" 
+                 *ngFor="let dep of filteredDependencies"
+                 (mousedown)="addDependency(dep.value); $event.preventDefault()">
+              <div class="search-result-body">
+                <div class="search-result-icon" *ngIf="dep.icon">
+                  <i [className]="dep.icon"></i>
+                </div>
+                <div class="search-result-details">
+                  <div class="card-title" style="font-size: 13px; font-weight: 600;">{{ dep.name }}</div>
+                  <div class="card-desc" style="font-size: 11px; margin-top: 1px;">{{ dep.desc }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tags-list" *ngIf="selectedDeps.length > 0">
+          <div class="tag" *ngFor="let dep of selectedDeps">
+            <i [className]="getDependencyIcon(dep)" style="font-size: 11px; margin-right: 4px;"></i>
+            <span>{{ getDependencyName(dep) }}</span>
+            <button class="tag-remove" (click)="removeDependency(dep)">×</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DevOps Options -->
+      <section>
+        <h2>DevOps Integration</h2>
+        <div class="selection-grid">
+          <div class="card" 
+               *ngFor="let option of devopsToolsList" 
+               [class.active]="isDevopsSelected(option.value)"
+               (click)="toggleDevops(option.value)">
+            <div class="card-body">
+              <div class="card-icon-container" *ngIf="option.icon">
+                <i [className]="option.icon"></i>
+              </div>
+              <div class="card-details">
+                <div class="card-header">
+                  <span class="card-title">{{ option.name }}</span>
+                  <span class="card-check-icon" *ngIf="isDevopsSelected(option.value)">✓</span>
+                </div>
+                <div class="card-desc">{{ option.desc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Right Side Panel: Project Preview -->
+  <aside class="preview-panel">
+    <div class="preview-header">
+      <h4>Aperçu du projet</h4>
+    </div>
+    <div class="preview-body">
+      <label style="font-weight: 500; font-size: 12px; color: var(--text-secondary);">Commande CLI équivalente</label>
+      <div class="cli-box">
+        {{ cliCommand }}
+      </div>
+      
+      <label style="margin-top: 8px; font-weight: 500; font-size: 12px; color: var(--text-secondary); display: block;">Fichiers générés</label>
+      <ul class="file-tree">
+        <li class="file-tree-item"
+            *ngFor="let file of virtualFiles"
+            [class.active]="activeFilePath === file.path"
+            (click)="selectFile(file.path)">
+          📄 {{ file.path }}
+        </li>
+      </ul>
+
+      <label style="margin-top: 12px; font-weight: 500; font-size: 12px; color: var(--text-secondary); display: block;">Contenu du fichier sélectionné</label>
+      <pre class="code-preview-box">{{ getActiveFileContent() }}</pre>
+    </div>
+  </aside>
+</div>
