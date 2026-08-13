@@ -5,7 +5,7 @@ Ce répertoire contient le cahier des charges fonctionnel et technique formel po
 ## Structure du Dossier
 
 ```text
-cahier des charges/
+docs/cahier-des-charges/
 ├── tex/                       # Code source LaTeX
 │   ├── Cahier_des_Charges_Webpick_Initializr.tex  # Document LaTeX principal
 │   └── figures/               # Logos officiels (Webpick, ENSAA)

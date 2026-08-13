@@ -5,7 +5,7 @@ Ce projet a été réorganisé pour séparer proprement les fichiers sources, le
 ## Structure du Projet
 
 ```text
-fiche technique/
+docs/fiche-technique/
 ├── tex/                       # Fichiers sources LaTeX
 │   ├── Fiche_Technique_...tex # Fichier source principal
 │   └── figures/               # Images et illustrations associees

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpick Omnistack Initializr</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #475569;
+            --bg-body: #f1f5f9;
+            --bg-surface: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-surface);
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo-area h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-area span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Sidebar (Summary) */
+        .summary-sidebar {
+            width: 350px;
+        }
+
+        .summary-card {
+            background: var(--bg-surface);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 6rem;
+        }
+
+        .summary-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-body);
+            padding-bottom: 0.5rem;
+        }
+
+        .summary-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .summary-list li span:last-child {
+            font-weight: 600;
+            color: var(--primary);
+            text-align: right;
+        }
+
+        /* Form Sections */
+        .section-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        input[type="text"],
+        select {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            background: var(--bg-surface);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Selectable Cards (Radio/Checkbox replacements) */
+        .tech-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: var(--bg-surface);
+        }
+
+        .tech-card:hover {
+            border-color: #93c5fd;
+            background: #eff6ff;
+        }
+
+        .tech-card.selected {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .tech-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .tech-card input {
+            display: none;
+        }
+
+        .tech-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+
+        .tech-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Badge */
+        .badge {
+            background: #fee2e2;
+            color: #ef4444;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        /* Buttons */
+        .btn-generate {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-generate:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Dynamic Sections */
+        .dynamic-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .dynamic-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .summary-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>Webpick Initializr</h1>
+            <span>Générateur Multi-Stack & Infrastructure DevOps</span>
+        </div>
+        <div style="font-size: 0.9rem; font-weight: 500; color: var(--secondary);">
+            Mode: Entreprise / Architecte
+        </div>
+    </header>
+
+    <div class="layout">
+        <!-- Main Form -->
+        <div class="main-content">
+
+            <!-- 1. Cœur du Projet (Frameworks) -->
+            <div class="section-card">
+                <div class="section-header">1. Architecture Core</div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Framework Backend Principal</label>
+                    <div class="grid-3" id="backendSelection">
+                        <label class="tech-card selected">
+                            <input type="radio" name="backend" value="spring" checked onchange="updateDynamicUI()">
+                            <h4>Spring Boot</h4>
+                            <p>Architecture Java multi-tiers, orientée objets et design patterns.</p>
+                        </label>
+                        <label class="tech-card">
+                            <input type="radio" name="backend" value="django" onchange="updateDynamicUI()">
+                            <h4>Django</h4>
+                            <p>Framework Python haut niveau. Idéal pour le prototypage rapide et l'IA.</p>
+                        </label>
+                        <label class="tech-card">
+                            <input type="radio" name="backend" value="express" onchange="updateDynamicUI()">
+                            <h4>Node.js / Express</h4>
+                            <p>JavaScript asynchrone côté serveur pour API légères.</p>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Application Frontend (Web)</label>
+                        <select id="frontendSelect" onchange="updateSummary()">
+                            <option value="angular">Angular (Architecture par composants, RxJS)</option>
+                            <option value="react">React (Composants fonctionnels, Hooks)</option>
+                            <option value="none">Aucun (API REST Only)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Application Mobile (Cross-platform)</label>
+                        <select id="mobileSelect" onchange="updateSummary()">
+                            <option value="none">Aucune</option>
+                            <option value="react-native">React Native</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Métadonnées Dynamiques -->
+            <div class="section-card">
+                <div class="section-header">2. Spécifications Techniques</div>
+
+                <!-- Bloc Spring Boot -->
+                <div id="meta-spring" class="dynamic-section active">
+                    <div class="grid-2" style="margin-bottom: 1rem;">
+                        <div class="form-group"><label>Language</label><select>
+                                <option>Java 21</option>
+                                <option>Java 17</option>
+                            </select></div>
+                        <div class="form-group"><label>Outil de Build</label><select>
+                                <option>Maven</option>
+                                <option>Gradle</option>
+                            </select></div>
+                        <div class="form-group"><label>Group ID</label><input type="text" value="com.webpick"></div>
+                        <div class="form-group"><label>Artifact ID</label><input type="text" value="core-service"></div>
+                    </div>
+                </div>
+
+                <!-- Bloc Django -->
+                <div id="meta-django" class="dynamic-section">
+                    <div class="grid-2" style="margin-bottom: 1rem;">
+                        <div class="form-group"><label>Version Python</label><select>
+                                <option>Python 3.12</option>
+                                <option>Python 3.11</option>
+                            </select></div>
+                        <div class="form-group"><label>Gestionnaire de paquets</label><select>
+                                <option>Poetry</option>
+                                <option>Pip + Virtualenv</option>
+                            </select></div>
+                        <div class="form-group"><label>Nom du Projet</label><input type="text" value="webpick_core">
+                        </div>
+                        <div class="form-group"><label>Application Principale</label><input type="text"
+                                value="api_gateway"></div>
+                    </div>
+                </div>
+
+                <!-- Bloc Node -->
+                <div id="meta-express" class="dynamic-section">
+                    <div class="grid-2" style="margin-bottom: 1rem;">
+                        <div class="form-group"><label>Language</label><select>
+                                <option>TypeScript</option>
+                                <option>JavaScript</option>
+                            </select></div>
+                        <div class="form-group"><label>Package Manager</label><select>
+                                <option>npm</option>
+                                <option>yarn</option>
+                            </select></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Base de Données Relationnelle / NoSQL</label>
+                    <select id="dbSelect" onchange="updateSummary()">
+                        <option value="postgres">PostgreSQL (Recommandé)</option>
+                        <option value="mysql">MySQL</option>
+                        <option value="mongodb">MongoDB (NoSQL orienté document)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 3. Dépendances & Sécurité Applicative -->
+            <div class="section-card">
+                <div class="section-header">3. Sécurité Applicative & Architecture</div>
+                <div class="grid-2" id="dynamic-deps">
+                    <!-- Rempli par JavaScript -->
+                </div>
+            </div>
+
+            <!-- 4. DevOps & CI/CD -->
+            <div class="section-card">
+                <div class="section-header">4. Orchestration DevOps & Pipeline</div>
+                <div class="grid-2">
+                    <label class="tech-card selected" onclick="toggleTechCard(this)">
+                        <input type="checkbox" checked onchange="updateSummary()">
+                        <h4>Docker & Docker Compose</h4>
+                        <p>Conteneurisation de l'API, du Frontend et de la base de données pour un lancement local
+                            instantané.</p>
+                    </label>
+                    <label class="tech-card selected" onclick="toggleTechCard(this)">
+                        <input type="checkbox" checked onchange="updateSummary()">
+                        <h4>Jenkins Pipeline</h4>
+                        <p>Génération du Jenkinsfile (Build, Test, SonarQube, Push Registry).</p>
+                    </label>
+                    <label class="tech-card" onclick="toggleTechCard(this)">
+                        <input type="checkbox" onchange="updateSummary()">
+                        <h4>Kubernetes (K8s)</h4>
+                        <p>Génération des manifests (Deployment, Service, Ingress) ou Helm Charts.</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Summary -->
+        <div class="summary-sidebar">
+            <div class="summary-card">
+                <h3>Résumé de l'Architecture</h3>
+                <ul class="summary-list">
+                    <li><span>Backend:</span> <span id="sum-backend">Spring Boot</span></li>
+                    <li><span>Frontend:</span> <span id="sum-frontend">Angular</span></li>
+                    <li><span>Mobile:</span> <span id="sum-mobile">Aucun</span></li>
+                    <li><span>Base de données:</span> <span id="sum-db">PostgreSQL</span></li>
+                </ul>
+                <button class="btn-generate"
+                    onclick="alert('Initialisation de l\'architecture en cours. Compilation des modèles...')">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Générer le Code Source (.zip)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion de la sélection visuelle des cartes (Radio)
+        const backendRadios = document.querySelectorAll('input[name="backend"]');
+        backendRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                document.querySelectorAll('input[name="backend"]').forEach(r => {
+                    r.closest('.tech-card').classList.remove('selected');
+                });
+                if (this.checked) this.closest('.tech-card').classList.add('selected');
+            });
+        });
+
+        // Gestion de la sélection visuelle des cartes (Checkbox)
+        function toggleTechCard(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            setTimeout(() => {
+                if (checkbox.checked) {
+                    element.classList.add('selected');
+                } else {
+                    element.classList.remove('selected');
+                }
+            }, 10);
+        }
+
+        // Dépendances dynamiques selon le framework
+        const dependencies = {
+            spring: `
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Mappers (MapStruct) <span class="badge">Requis</span></h4>
+                    <p>Isolation stricte entre les Entités du domaine et les DTOs.</p>
+                </label>
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Spring Security & Protections</h4>
+                    <p>Authentification JWT, Configuration CORS et défenses anti-CSRF au niveau du framework.</p>
+                </label>
+            `,
+            django: `
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Django REST Framework</h4>
+                    <p>Sérialisation avancée et gestion des vues basées sur les classes.</p>
+                </label>
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Sécurité Applicative Django</h4>
+                    <p>Middlewares de sécurité, JWT (SimpleJWT) et tokens CSRF stricts.</p>
+                </label>
+            `,
+            express: `
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Validation & Sérialisation</h4>
+                    <p>Zod ou Joi pour la validation des schémas de données entrants.</p>
+                </label>
+                <label class="tech-card selected" onclick="toggleTechCard(this)">
+                    <input type="checkbox" checked>
+                    <h4>Sécurité (Helmet & CORS)</h4>
+                    <p>Headers HTTP sécurisés et configuration CORS stricte pour les requêtes cross-origin.</p>
+                </label>
+            `
+        };
+
+        function updateDynamicUI() {
+            const backend = document.querySelector('input[name="backend"]:checked').value;
+
+            // 1. Mise à jour des métadonnées
+            document.querySelectorAll('.dynamic-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`meta-${backend}`).classList.add('active');
+
+            // 2. Mise à jour des dépendances de sécurité/architecture
+            document.getElementById('dynamic-deps').innerHTML = dependencies[backend];
+
+            // 3. Mise à jour du résumé
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const backendStr = document.querySelector('input[name="backend"]:checked').nextElementSibling.innerText;
+            const frontendStr = document.getElementById('frontendSelect').options[document.getElementById('frontendSelect').selectedIndex].text.split(' ')[0];
+            const mobileStr = document.getElementById('mobileSelect').options[document.getElementById('mobileSelect').selectedIndex].text;
+            const dbStr = document.getElementById('dbSelect').options[document.getElementById('dbSelect').selectedIndex].text.split(' ')[0];
+
+            document.getElementById('sum-backend').innerText = backendStr;
+            document.getElementById('sum-frontend').innerText = frontendStr;
+            document.getElementById('sum-mobile').innerText = mobileStr;
+            document.getElementById('sum-db').innerText = dbStr;
+        }
+
+        // Initialisation au chargement
+        updateDynamicUI();
+    </script>
+</body>
+
+</html>
