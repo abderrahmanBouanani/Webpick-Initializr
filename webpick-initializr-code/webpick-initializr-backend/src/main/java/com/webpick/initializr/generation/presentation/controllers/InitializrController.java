@@ -6,18 +6,26 @@ import com.webpick.initializr.generation.application.ports.in.IGenerateProjectUs
 import com.webpick.initializr.generation.domain.entities.GenerationContext;
 import com.webpick.initializr.generation.presentation.dto.ProjectRequestDTO;
 import com.webpick.initializr.generation.presentation.mappers.ProjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//we should writh all the comments in english and briefly
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/projects")
+@Tag(name = "Project Generation", description = "Endpoints for project bootstrapping, configuration, and archive delivery")
 public class InitializrController {
 
     // Dependency injection of the use case and mapper
@@ -29,7 +37,28 @@ public class InitializrController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/generate")
+    @PostMapping(value = "/generate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/zip")
+    @Operation(
+            summary = "Generate project starter archive",
+            description = "Processes the requested project configuration, renders FreeMarker code templates, packages them into a ZIP archive, and optionally initiates remote Git export."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Project ZIP archive successfully generated and returned as binary stream",
+                    content = @Content(mediaType = "application/zip")
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid configuration parameters",
+                    content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server or template rendering error",
+                    content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))
+            )
+    })
     public ResponseEntity<byte[]> generateProject(@RequestBody ProjectRequestDTO request) {
         try {
             // 1. Mapping the incoming request DTO to the domain GenerationContext
