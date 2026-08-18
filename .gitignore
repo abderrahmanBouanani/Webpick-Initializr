@@ -28,3 +28,10 @@ state_walkthrough.md
 .agents/
 conversation_summary.md
 
+# Scratch / non-project artifacts
+dom*.html
+test.zip
+courses/
+ticketAssignement*/
+
+
