@@ -1,0 +1,52 @@
+services:
+  backend:
+    build:
+      context: ./webpick-initializr-code/webpick-initializr-backend
+      dockerfile: Dockerfile
+    container_name: webpick-initializr-backend
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_APPLICATION_NAME=webpick-initializr
+    networks:
+      - webpick-network
+
+  frontend:
+    build:
+      context: ./webpick-initializr-code/webpick-initializr-frontend
+      dockerfile: Dockerfile
+    container_name: webpick-initializr-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - webpick-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: webpick-postgres
+    restart: unless-stopped
+    profiles:
+      - with-postgres
+    environment:
+      POSTGRES_DB: webpick
+      POSTGRES_USER: webpick
+      POSTGRES_PASSWORD: webpicksecret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - webpick-network
+
+networks:
+  webpick-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
